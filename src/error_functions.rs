@@ -4,7 +4,7 @@ use std::io;
 use std::io::{stdout, stderr, Write};
 
 use crate::ename;
-use crate::libc::{strerror, read_char_ptr,abort,_exit,exit};
+use crate::libc::{strerror, read_char_ptr, abort, _exit, exit, errno, set_errno};
 
 fn str_error(errnum: c_int) -> String {
     let chars = unsafe { strerror(errnum) };
@@ -52,4 +52,45 @@ pub fn output_error(use_err: bool, err: c_int, flush_stdout: bool, msg: &str) {
     //NOTE: C version uses fflush
     eprintln!("{}", err_msg);
     io::stderr().flush().expect("failed to flush stderr");
+}
+
+pub fn err_msg(msg: &str) {
+    let saved_errno = errno();
+    output_error(true, errno(), true, msg);
+    set_errno(saved_errno);
+}
+
+pub fn err_exit(msg: &str) -> ! {
+    output_error(true, errno(), true, msg);
+    terminate(true);
+}
+
+pub fn err_exit_en(errnum: c_int, msg: &str) -> ! {
+    output_error(true, errnum, true, msg);
+    terminate(true);
+}
+
+pub fn fatal(msg: &str) -> ! {
+    output_error(false, 0, true, msg);
+    terminate(true);
+}
+
+pub fn usage_err(msg: &str) -> ! {
+    //NOTE: C version uses fflush
+    io::stdout().flush().expect("failed to flush stdout");
+
+    eprintln!("Usage: {}", msg);
+
+    io::stdout().flush().expect("failed to flush stdout");
+    unsafe { exit(ExitStatus::Failure as c_int); }
+}
+
+pub fn cmd_line_err(msg: &str) -> ! {
+    //NOTE: C version uses fflush
+    io::stdout().flush().expect("failed to flush stdout");
+    
+    eprint!("Command-line usage error: {}", msg);
+    
+    io::stdout().flush().expect("failed to flush stdout");
+    unsafe { exit(ExitStatus::Failure as c_int); }
 }
