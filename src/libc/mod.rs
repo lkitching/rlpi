@@ -1,9 +1,9 @@
 use std::ffi::CStr;
-use std::os::raw::{c_int, c_char, c_void};
+use std::os::raw::{c_int, c_char};
 
-pub type mode_t = u32; //typesizes.h
-pub type size_t = usize;	//from libc crate
-pub type ssize_t = c_int;	//alias depends on word size? __SSIZE_T defined as __SWORD_TYPE
+pub mod fcntl;
+pub mod sys;
+pub mod unistd;
 
 #[link(name = "c")]
 extern {
@@ -12,17 +12,9 @@ extern {
     pub fn abort() -> !;
     pub fn exit(status: c_int) -> !;
     pub fn _exit(status: c_int) -> !;
-    fn __errno_location() -> *mut c_int;
-
-    pub fn open(pathname: *const c_char, flags: c_int, mode: mode_t) -> c_int;
-    pub fn read(fd: c_int, buf: *mut c_void, count: size_t) -> ssize_t;
-    pub fn write(fd: c_int, buf: *const c_void, count: size_t) -> ssize_t;
-    pub fn close(fd: c_int) -> c_int;
+    fn __errno_location() -> *mut c_int;    
 }
 
-pub unsafe fn open2(pathname: *const c_char, flags: c_int) -> c_int {
-    open(pathname, flags, 0)
-}
 
 //see https://www.gnu.org/software/libc/manual/html_node/Exit-Status.html
 pub enum ExitStatus {

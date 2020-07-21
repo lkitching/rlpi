@@ -1,7 +1,5 @@
 use std::os::raw::{c_int};
 
-use crate::libc::{read_char_ptr, strerror};
-
 static ENAMES: [&'static str; 134] = [
     /*   0 */ "", 
     /*   1 */ "EPERM", "ENOENT", "ESRCH", "EINTR", "EIO", "ENXIO", 

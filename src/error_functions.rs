@@ -1,7 +1,7 @@
 use std::env;
 use std::os::raw::{c_int};
 use std::io;
-use std::io::{stdout, stderr, Write};
+use std::io::{Write};
 
 use crate::ename;
 use crate::libc::{strerror, read_char_ptr, abort, _exit, exit, errno, set_errno, ExitStatus};
