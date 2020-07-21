@@ -11,6 +11,13 @@ extern {
     fn __errno_location() -> *mut c_int;
 }
 
+//see https://www.gnu.org/software/libc/manual/html_node/Exit-Status.html
+pub enum ExitStatus {
+    Success = 0,
+    Failure = 1
+}
+
+
 //TODO: move this?
 pub fn read_char_ptr(chars: *const c_char) -> String {
     unsafe {

@@ -4,18 +4,13 @@ use std::io;
 use std::io::{stdout, stderr, Write};
 
 use crate::ename;
-use crate::libc::{strerror, read_char_ptr, abort, _exit, exit, errno, set_errno};
+use crate::libc::{strerror, read_char_ptr, abort, _exit, exit, errno, set_errno, ExitStatus};
 
 fn str_error(errnum: c_int) -> String {
     let chars = unsafe { strerror(errnum) };
     read_char_ptr(chars)
 }
 
-//see https://www.gnu.org/software/libc/manual/html_node/Exit-Status.html
-enum ExitStatus {
-    Success = 0,
-    Failure = 1
-}
 
 fn should_dump_core() -> bool {
     match env::var("EF_DUMPCORE") {
