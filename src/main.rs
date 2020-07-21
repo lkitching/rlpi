@@ -1,12 +1,15 @@
 use std::os::raw::{c_char};
 use std::ffi::CStr;
+use std::env;
 
 mod libc;
 mod error_functions;
 mod ename;
+mod fileio;
 
 use crate::libc::{gnu_get_libc_version, read_char_ptr};
 use crate::error_functions::{terminate, output_error};
+use crate::fileio::copy;
 
 fn main() {
     unsafe {
@@ -14,7 +17,8 @@ fn main() {
 	let version_string = read_char_ptr(c_buf);
 	println!("glibc version: {}", version_string);
 
-	output_error(true, 5, true, "Error occured");
-	terminate(true);
+	let args: Vec<String> = env::args().collect();
+	copy::main(&args[..]);
+	//terminate(true);
     }    
 }
