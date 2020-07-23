@@ -1,6 +1,7 @@
 use std::ffi::CStr;
 use std::os::raw::{c_int, c_char};
 
+pub mod ctype;
 pub mod fcntl;
 pub mod sys;
 pub mod unistd;

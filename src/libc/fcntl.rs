@@ -27,6 +27,7 @@ pub const O_RSYNC: c_int = O_SYNC;
 #[link(name = "c")]
 extern {
     pub fn open(pathname: *const c_char, flags: c_int, mode: mode_t) -> c_int;
+    pub fn creat(pathname: *const c_char, mode: mode_t) -> c_int;
 }
 
 pub unsafe fn open2(pathname: *const c_char, flags: c_int) -> c_int {
