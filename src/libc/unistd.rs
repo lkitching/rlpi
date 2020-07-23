@@ -8,6 +8,11 @@ pub const SEEK_END: c_int = 2;
 pub const SEEK_DATA: c_int = 3;
 pub const SEEK_HOLE: c_int = 4;
 
+//standard file descriptors
+pub const STDIN_FILENO: c_int = 0;
+pub const STDOUT_FILENO: c_int = 1;
+pub const STDERR_FILENO: c_int = 2;
+
 #[link(name = "c")]
 extern {
     pub fn read(fd: c_int, buf: *mut c_void, count: size_t) -> ssize_t;
