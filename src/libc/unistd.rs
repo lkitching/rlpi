@@ -19,4 +19,11 @@ extern {
     pub fn write(fd: c_int, buf: *const c_void, count: size_t) -> ssize_t;
     pub fn close(fd: c_int) -> c_int;
     pub fn lseek(fd: c_int, offset: off_t, whence: c_int) -> off_t;
+
+    pub fn pread(fd: c_int, buf: *mut c_void, count: size_t, offset: off_t) -> c_int;
+    pub fn pwrite(fd: c_int, buf: *const c_void, count: size_t, offset: off_t) -> c_int;
+    
+    pub fn dup(old_fd: c_int) -> c_int;
+    pub fn dup2(old_fd: c_int, new_fd: c_int) -> c_int;
+    pub fn dup3(old_fd: c_int, new_fd: c_int, flags: c_int) -> c_int;
 }
