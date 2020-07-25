@@ -13,7 +13,8 @@ extern {
     pub fn abort() -> !;
     pub fn exit(status: c_int) -> !;
     pub fn _exit(status: c_int) -> !;
-    fn __errno_location() -> *mut c_int;    
+    fn __errno_location() -> *mut c_int;
+    pub static environ: *mut *mut c_char;
 }
 
 
