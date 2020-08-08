@@ -8,7 +8,7 @@ fn read_user_name(p: *mut passwd) -> String {
     cs.to_owned()
 }
 
-fn user_name_from_id(uid: uid_t) -> Option<String> {
+pub fn user_name_from_id(uid: uid_t) -> Option<String> {
     let p = unsafe { getpwuid(uid) };
     if p.is_null() {
 	None
@@ -18,7 +18,7 @@ fn user_name_from_id(uid: uid_t) -> Option<String> {
     }
 }
 
-fn user_id_from_name(name: &str) -> Option<uid_t> {
+pub fn user_id_from_name(name: &str) -> Option<uid_t> {
     if let Ok(id) = name.parse::<uid_t>() {
 	return Some(id)
     }
@@ -33,7 +33,7 @@ fn user_id_from_name(name: &str) -> Option<uid_t> {
     }
 }
 
-fn group_name_from_id(gid: gid_t) -> Option<String> {
+pub fn group_name_from_id(gid: gid_t) -> Option<String> {
     let gp = unsafe { getgrgid(gid) };
     if gp.is_null() {
 	None
@@ -43,7 +43,7 @@ fn group_name_from_id(gid: gid_t) -> Option<String> {
     }
 }
 
-fn group_id_from_name(name: &str) -> Option<gid_t> {
+pub fn group_id_from_name(name: &str) -> Option<gid_t> {
     if let Ok(id) = name.parse::<gid_t>() {
 	return Some(id);
     }

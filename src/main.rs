@@ -8,13 +8,11 @@ mod proc;
 mod util;
 mod memalloc;
 mod users_groups;
+mod proccred;
 
-// use crate::libc::{gnu_get_libc_version, read_char_ptr};
-// use crate::fileio::{copy, seek_io, tee, t_readv, t_append};
-//use crate::proc::{display_env, modify_env};
-use crate::users_groups::ugid_functions;
+use crate::proccred::idshow;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    ugid_functions::main(&args[..]);
+    idshow::main(&args[..]);
 }
