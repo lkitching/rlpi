@@ -5,6 +5,7 @@ pub mod ctype;
 pub mod fcntl;
 pub mod sys;
 pub mod unistd;
+pub mod time;
 
 #[link(name = "c")]
 extern {

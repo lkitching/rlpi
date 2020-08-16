@@ -9,10 +9,11 @@ mod util;
 mod memalloc;
 mod users_groups;
 mod proccred;
+mod time;
 
-use crate::proccred::idshow;
+use crate::time::calendar_time;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    idshow::main(&args[..]);
+    calendar_time::main(&args[..]);    
 }
