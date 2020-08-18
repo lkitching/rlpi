@@ -11,9 +11,9 @@ mod users_groups;
 mod proccred;
 mod time;
 
-use crate::time::calendar_time;
+use crate::time::strtime;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    calendar_time::main(&args[..]);    
+    strtime::main(&args[..]);    
 }
