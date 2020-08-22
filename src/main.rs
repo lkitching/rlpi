@@ -10,10 +10,11 @@ mod memalloc;
 mod users_groups;
 mod proccred;
 mod time;
+mod syslim;
 
-use crate::time::process_time;
+use crate::syslim::{t_sysconf};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    process_time::main(&args[..]);    
+    t_sysconf::main(&args[..]);    
 }
