@@ -11,9 +11,9 @@ mod users_groups;
 mod proccred;
 mod time;
 
-use crate::time::show_time;
+use crate::time::process_time;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    show_time::main(&args[..]);    
+    process_time::main(&args[..]);    
 }
