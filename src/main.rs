@@ -12,9 +12,9 @@ mod proccred;
 mod time;
 mod syslim;
 
-use crate::syslim::{t_sysconf};
+use crate::syslim::{t_fpathconf};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    t_sysconf::main(&args[..]);    
+    t_fpathconf::main(&args[..]);    
 }
