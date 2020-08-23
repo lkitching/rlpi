@@ -11,10 +11,11 @@ mod users_groups;
 mod proccred;
 mod time;
 mod syslim;
+mod sysinfo;
 
-use crate::syslim::{t_fpathconf};
+use crate::sysinfo::{t_uname};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    t_fpathconf::main(&args[..]);    
+    t_uname::main(&args[..]);    
 }

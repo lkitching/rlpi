@@ -1,6 +1,7 @@
 use std::ffi::{CStr, CString};
 use std::mem;
 use libc::{tm};
+use std::os::raw::{c_char};
 
 use crate::libc::{environ};
 use crate::libc::time::{strftime};
@@ -46,5 +47,14 @@ pub fn fmt_strftime(format: &str, tm: &tm) -> Result<String, ()> {
 	let cs = unsafe { CString::from_vec_unchecked(buf) };
 	let s = cs.to_str().expect("Failed to create str").to_owned();
 	Ok(s)
+    }
+}
+
+//read a str reference from a buffer of C chars
+//WARNING: declared lifetime of returned slice is arbitrary so buffer
+//must outlive it!
+pub fn read_str<'a>(chars: *const c_char) -> &'a str {
+    unsafe {
+	CStr::from_ptr(chars).to_str().expect("Invalid CStr")
     }
 }
