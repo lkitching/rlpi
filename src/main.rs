@@ -12,10 +12,11 @@ mod proccred;
 mod time;
 mod syslim;
 mod sysinfo;
+mod filebuff;
 
-use crate::sysinfo::{t_uname};
+use crate::filebuff::{direct_read};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    t_uname::main(&args[..]);    
+    direct_read::main(&args[..]);    
 }
