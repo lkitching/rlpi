@@ -13,10 +13,11 @@ mod time;
 mod syslim;
 mod sysinfo;
 mod filebuff;
+mod filesys;
 
-use crate::filebuff::{direct_read};
+use crate::filesys::{t_mount};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    direct_read::main(&args[..]);    
+    t_mount::main(&args[..]);    
 }
