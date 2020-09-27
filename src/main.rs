@@ -14,10 +14,11 @@ mod syslim;
 mod sysinfo;
 mod filebuff;
 mod filesys;
+mod files;
 
-use crate::filesys::{t_mount};
+use crate::files::{t_stat};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    t_mount::main(&args[..]);    
+    t_stat::main(&args[..]);    
 }
