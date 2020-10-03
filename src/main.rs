@@ -16,9 +16,9 @@ mod filebuff;
 mod filesys;
 mod files;
 
-use crate::files::{t_stat};
+use crate::files::{t_chown};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    t_stat::main(&args[..]);    
+    t_chown::main(&args[..]);    
 }
