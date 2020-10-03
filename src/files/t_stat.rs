@@ -9,11 +9,7 @@ use clap::{Arg, App};
 use crate::error_functions::{err_exit};
 use crate::util::{read_str};
 use crate::libc::time::{ctime};
-
-// TODO: implement!
-fn file_perm_str(mode: mode_t) -> String {
-    String::from("???")
-}
+use super::file_perms::{file_perm_str};
 
 fn display_stat_info(sb: &stat) {
     print!("File type:\t\t");
@@ -30,7 +26,7 @@ fn display_stat_info(sb: &stat) {
 
     println!("Device containing i-node: major={}\tminor={}", unsafe { major(sb.st_dev) }, unsafe { minor(sb.st_dev) });
     println!("I-node number: {}", sb.st_ino);
-    println!("Mode:\t\t{} ({})", sb.st_mode, file_perm_str(sb.st_mode));
+    println!("Mode:\t\t{} ({})", sb.st_mode, file_perm_str(sb.st_mode, true));
 
     if sb.st_mode & (S_ISUID | S_ISGID | S_ISVTX) > 0 {
 	println!("special bits set:\t\t {}{}{}",
