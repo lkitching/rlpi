@@ -15,10 +15,11 @@ mod sysinfo;
 mod filebuff;
 mod filesys;
 mod files;
+mod xattr;
 
-use crate::files::{t_umask};
+use crate::xattr::{xattr_view};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    t_umask::main(&args[..]);    
+    xattr_view::main(&args[..]);    
 }
