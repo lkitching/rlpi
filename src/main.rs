@@ -16,10 +16,11 @@ mod filebuff;
 mod filesys;
 mod files;
 mod xattr;
+mod dirs_links;
 
-use crate::xattr::{xattr_view};
+use crate::dirs_links::{t_unlink};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    xattr_view::main(&args[..]);    
+    t_unlink::main(&args[..]);    
 }
