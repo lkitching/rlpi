@@ -18,9 +18,9 @@ mod files;
 mod xattr;
 mod dirs_links;
 
-use crate::dirs_links::{t_unlink};
+use crate::dirs_links::{list_files};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    t_unlink::main(&args[..]);    
+    list_files::main(&args[..]);
 }

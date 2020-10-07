@@ -47,6 +47,3 @@ pub fn set_errno(errno: c_int) {
 	*loc = errno;
     }
 }
-
-
-
