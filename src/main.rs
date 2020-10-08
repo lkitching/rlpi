@@ -17,10 +17,11 @@ mod filesys;
 mod files;
 mod xattr;
 mod dirs_links;
+mod inotify;
 
-use crate::dirs_links::{t_dirbasename};
+use crate::inotify::{demo_inotify};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    t_dirbasename::main(&args[..]);
+    demo_inotify::main(&args[..]);
 }
