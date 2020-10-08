@@ -18,9 +18,9 @@ mod files;
 mod xattr;
 mod dirs_links;
 
-use crate::dirs_links::{view_symlink};
+use crate::dirs_links::{t_dirbasename};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    view_symlink::main(&args[..]);
+    t_dirbasename::main(&args[..]);
 }

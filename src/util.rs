@@ -30,6 +30,12 @@ fn vec_i8_into_u8(v: Vec<i8>) -> Vec<u8> {
     unsafe { Vec::from_raw_parts(p as *mut u8, v.len(), v.capacity()) }    
 }
 
+pub fn vec_u8_into_i8(v: Vec<u8>) -> Vec<i8> {
+    let mut v = mem::ManuallyDrop::new(v);
+    let p = v.as_mut_ptr();
+    unsafe { Vec::from_raw_parts(p as *mut i8, v.len(), v.capacity()) }
+}
+
 pub fn fmt_strftime(format: &str, tm: &tm) -> Result<String, ()> {
     //TODO: propagate error?
     let fs_cstr = CString::new(format).expect("Failed to create CString");
