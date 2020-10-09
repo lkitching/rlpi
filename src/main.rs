@@ -18,10 +18,11 @@ mod files;
 mod xattr;
 mod dirs_links;
 mod inotify;
+mod signals;
 
-use crate::inotify::{demo_inotify};
+use crate::signals::{ouch};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    demo_inotify::main(&args[..]);
+    ouch::main(&args[..]);
 }
