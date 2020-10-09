@@ -20,9 +20,9 @@ mod dirs_links;
 mod inotify;
 mod signals;
 
-use crate::signals::{ouch};
+use crate::signals::{intquit};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    ouch::main(&args[..]);
+    intquit::main(&args[..]);
 }
