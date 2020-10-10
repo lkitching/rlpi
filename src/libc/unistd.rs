@@ -1,4 +1,4 @@
-use std::os::raw::{c_int, c_void};
+use std::os::raw::{c_int, c_void, c_char};
 use super::sys::types::{size_t, ssize_t, off_t};
 
 //also defined in stdio.h
@@ -26,4 +26,6 @@ extern {
     pub fn dup(old_fd: c_int) -> c_int;
     pub fn dup2(old_fd: c_int, new_fd: c_int) -> c_int;
     pub fn dup3(old_fd: c_int, new_fd: c_int, flags: c_int) -> c_int;
+
+    pub fn crypt(key: *const c_char, salt: *const c_char) -> *mut c_char;
 }

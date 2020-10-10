@@ -3,7 +3,7 @@ use std::os::raw::{c_int};
 use std::mem::{MaybeUninit};
 use std::ptr;
 
-use libc::{FILE, sigset_t, strsignal, fprintf, sigismember, SIG_BLOCK, sigprocmask, sigpending};
+use libc::{FILE, sigset_t, strsignal, fprintf, sigismember, SIG_BLOCK, sigprocmask, sigpending, sigemptyset};
 
 use crate::libc::signal::{NSIG};
 
@@ -52,4 +52,14 @@ pub fn print_pending_sigs(of: *mut FILE, msg: &str) -> Result<(), ()> {
     let pending_sigs = unsafe { pending_sigs.assume_init() };
     print_sigset(of, "\t\t", &pending_sigs);
     Ok(())
+}
+
+pub fn sig_empty_set() -> sigset_t {
+    unsafe {
+	let mut empty_mask = MaybeUninit::uninit();
+	if sigemptyset(empty_mask.as_mut_ptr()) == -1 {
+	    panic!("Failed to initialise empty signal set");	
+	}
+	empty_mask.assume_init()
+    }
 }
