@@ -7,6 +7,7 @@ pub mod sys;
 pub mod unistd;
 pub mod time;
 pub mod libgen;
+pub mod stdio;
 
 #[link(name = "c")]
 extern {

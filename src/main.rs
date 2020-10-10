@@ -20,9 +20,22 @@ mod dirs_links;
 mod inotify;
 mod signals;
 
-use crate::signals::{t_kill};
+use crate::signals::{sig_sender, sig_receiver};
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    t_kill::main(&args[..]);
+    let mut args: Vec<String> = env::args().collect();
+    if args.len() < 2 {
+	eprintln!("Usage: {} cmd args...", args[0]);
+	std::process::exit(-1);
+    } else {
+	let cmd = args.remove(1);
+	match cmd.as_str() {
+	    "send" => { sig_sender::main(&args); },
+	    "receive" => { sig_receiver::main(&args)  },
+	    cmd => {
+		eprintln!("Invalid command '{}', expected send or receive", cmd);
+		std::process::exit(-1);
+	    }
+	}
+    }    
 }

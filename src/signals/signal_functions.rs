@@ -9,7 +9,7 @@ use libc::{FILE, sigset_t, strsignal, fprintf, sigismember, SIG_BLOCK, sigprocma
 // #define __SIGRTMAX __SIGRTMIN  (bits/signum-generic.h)
 // #define _NGIG (__SIGRTMAX + 1) (bits/signum-generic.h)
 // #define NSIG _NSIG             (signal.h)
-const NSIG: c_int = 33;
+pub const NSIG: c_int = 33;
 
 //NOTE: The following functions use fprintf which is not async signal-safe!
 
