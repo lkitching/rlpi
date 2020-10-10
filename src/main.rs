@@ -20,9 +20,9 @@ mod dirs_links;
 mod inotify;
 mod signals;
 
-use crate::signals::{nonreentrant};
+use crate::signals::{t_sigaltstack};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    nonreentrant::main(&args); 
+    t_sigaltstack::main(&args);
 }

@@ -9,7 +9,7 @@ use crate::libc::signal::{NSIG};
 
 //NOTE: The following functions use fprintf which is not async signal-safe!
 
-fn str_signal(sig: c_int) -> String {
+pub fn str_signal(sig: c_int) -> String {
     let s = unsafe { strsignal(sig) };
     unsafe { CStr::from_ptr(s) }.to_str().expect("Failed to read CStr").to_owned()
 }
