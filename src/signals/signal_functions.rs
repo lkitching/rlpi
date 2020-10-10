@@ -5,11 +5,7 @@ use std::ptr;
 
 use libc::{FILE, sigset_t, strsignal, fprintf, sigismember, SIG_BLOCK, sigprocmask, sigpending};
 
-// #define __SIGRTMIN 32          (bits/signum-generic.h)
-// #define __SIGRTMAX __SIGRTMIN  (bits/signum-generic.h)
-// #define _NGIG (__SIGRTMAX + 1) (bits/signum-generic.h)
-// #define NSIG _NSIG             (signal.h)
-pub const NSIG: c_int = 33;
+use crate::libc::signal::{NSIG};
 
 //NOTE: The following functions use fprintf which is not async signal-safe!
 

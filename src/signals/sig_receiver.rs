@@ -7,9 +7,10 @@ use std::mem::{MaybeUninit};
 use libc::{exit, EXIT_SUCCESS, getpid, signal, sighandler_t, sigfillset, sigprocmask, sleep, SIG_SETMASK,
            sigpending, sigemptyset, SIGINT};
 
-use super::signal_functions::{NSIG, print_sigset};
+use super::signal_functions::{print_sigset};
 use crate::error_functions::{err_exit};
 use crate::libc::stdio::{stdout};
+use crate::libc::signal::{NSIG};
 
 static SIGNAL_COUNTS: [AtomicUsize; NSIG as usize] = [
     AtomicUsize::new(0),
