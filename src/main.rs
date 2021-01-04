@@ -20,9 +20,9 @@ mod dirs_links;
 mod inotify;
 mod signals;
 
-use crate::signals::{t_sigwaitinfo};
+use crate::signals::{signalfd_sigval};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    t_sigwaitinfo::main(&args);
+    signalfd_sigval::main(&args);
 }

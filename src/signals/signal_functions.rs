@@ -7,6 +7,9 @@ use libc::{FILE, sigset_t, strsignal, fprintf, sigismember, SIG_BLOCK, sigprocma
 
 use crate::libc::signal::{NSIG};
 
+pub const SI_USER: c_int = -1;
+pub const SI_QUEUE: c_int = -2;
+
 //NOTE: The following functions use fprintf which is not async signal-safe!
 
 pub fn str_signal(sig: c_int) -> String {

@@ -6,10 +6,7 @@ use libc::{exit, EXIT_SUCCESS, getpid, sigfillset, sigprocmask, SIG_SETMASK, sig
            SIGTERM};
 
 use crate::error_functions::{usage_err, err_exit};
-use crate::signals::signal_functions::{str_signal};
-
-const SI_USER: c_int = -1;
-const SI_QUEUE: c_int = -2;
+use crate::signals::signal_functions::{str_signal, SI_QUEUE, SI_USER};
 
 pub fn main(args: &[String]) -> ! {
     let prog_name = args[0].as_str();
