@@ -1,6 +1,9 @@
 use std::os::raw::{c_char};
 use libc::{tm, time_t, size_t, clock_t};
 
+//NOTE: defined in bits/time.h
+pub const CLOCKS_PER_SEC: clock_t = 1000000;
+
 #[link(name = "c")]
 extern {
     pub fn asctime(tm: *const tm) -> *const c_char;

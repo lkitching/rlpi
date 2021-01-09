@@ -3,12 +3,10 @@ use std::os::raw::{c_long};
 use libc::{sysconf, _SC_CLK_TCK, exit, EXIT_SUCCESS, getppid, tms, times, clock_t};
 use std::mem::MaybeUninit;
 
-use crate::libc::time::{clock};
+use crate::libc::time::{clock, CLOCKS_PER_SEC};
 use crate::error_functions::{err_exit};
 
 fn display_process_times(msg: &str, clock_ticks: c_long) {
-    //NOTE: defined in bits/time.h
-    const CLOCKS_PER_SEC: clock_t = 1000000;
     
     println!("{}", msg);
 
