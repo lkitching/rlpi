@@ -19,10 +19,11 @@ mod xattr;
 mod dirs_links;
 mod inotify;
 mod signals;
+mod timers;
 
-use crate::signals::{signalfd_sigval};
+use crate::timers::{real_timer};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    signalfd_sigval::main(&args);
+    real_timer::main(&args);
 }
