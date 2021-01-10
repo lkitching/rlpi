@@ -21,9 +21,9 @@ mod inotify;
 mod signals;
 mod timers;
 
-use crate::timers::{timed_read};
+use crate::timers::{t_nanosleep};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    timed_read::main(&args);
+    t_nanosleep::main(&args);
 }
