@@ -1,5 +1,7 @@
 use std::ffi::{CStr, CString};
 use std::mem;
+use std::fmt;
+use std::str::{FromStr};
 use libc::{tm};
 use std::os::raw::{c_char};
 
@@ -62,5 +64,15 @@ pub fn fmt_strftime(format: &str, tm: &tm) -> Result<String, ()> {
 pub fn read_str<'a>(chars: *const c_char) -> &'a str {
     unsafe {
 	CStr::from_ptr(chars).to_str().expect("Invalid CStr")
+    }
+}
+
+pub fn numeric_arg_or<T>(args: &[String], index: usize, default: T) -> T where
+  T : FromStr,
+  T::Err : fmt::Debug {
+    if index < args.len() {
+	T::from_str(args[index].as_str()).expect("Invalid number")
+    } else {
+	default
     }
 }

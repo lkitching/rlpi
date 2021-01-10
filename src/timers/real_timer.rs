@@ -8,6 +8,7 @@ use std::os::raw::{c_int};
 
 use libc::{timeval, gettimeofday, itimerval, exit, EXIT_SUCCESS, ITIMER_REAL, sigaction, sighandler_t, SIGALRM};
 
+use crate::util::{numeric_arg_or};
 use crate::libc::time::{clock, CLOCKS_PER_SEC};
 use crate::libc::sys::time::{getitimer, setitimer};
 use crate::error_functions::{err_exit, usage_err};
@@ -80,16 +81,6 @@ extern "C" fn sigalarm_handler(sig: c_int) {
     println!("BEFORE: {}", GOT_ALARM.load(Ordering::SeqCst));
     GOT_ALARM.store(true, Ordering::SeqCst);
     println!("AFTER: {}", GOT_ALARM.load(Ordering::SeqCst));
-}
-
-fn numeric_arg_or<T>(args: &[String], index: usize, default: T) -> T where
-  T : FromStr,
-  T::Err : fmt::Debug {
-    if index < args.len() {
-	T::from_str(args[index].as_str()).expect("Invalid number")
-    } else {
-	default
-    }
 }
 
 pub fn main(args: &[String]) -> ! {
