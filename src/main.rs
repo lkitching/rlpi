@@ -21,9 +21,9 @@ mod inotify;
 mod signals;
 mod timers;
 
-use crate::timers::{real_timer};
+use crate::timers::{timed_read};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    real_timer::main(&args);
+    timed_read::main(&args);
 }
