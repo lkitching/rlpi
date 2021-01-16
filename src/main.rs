@@ -22,9 +22,9 @@ mod signals;
 mod timers;
 mod procexec;
 
-use crate::procexec::{t_fork};
+use crate::procexec::{fork_file_sharing};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    t_fork::main(&args);
+    fork_file_sharing::main(&args);
 }
