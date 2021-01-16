@@ -20,10 +20,11 @@ mod dirs_links;
 mod inotify;
 mod signals;
 mod timers;
+mod procexec;
 
-use crate::timers::{demo_timerfd};
+use crate::procexec::{t_fork};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    demo_timerfd::main(&args);
+    t_fork::main(&args);
 }
