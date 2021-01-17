@@ -21,10 +21,11 @@ mod inotify;
 mod signals;
 mod timers;
 mod procexec;
+mod curr_time;
 
-use crate::procexec::{fork_whos_on_first};
+use crate::procexec::{fork_sig_sync};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    fork_whos_on_first::main(&args);
+    fork_sig_sync::main(&args);
 }
