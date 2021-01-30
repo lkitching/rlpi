@@ -23,9 +23,9 @@ mod timers;
 mod procexec;
 mod curr_time;
 
-use crate::procexec::{fork_sig_sync};
+use crate::procexec::{exit_handlers};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    fork_sig_sync::main(&args);
+    exit_handlers::main(&args);
 }

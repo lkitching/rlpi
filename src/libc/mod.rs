@@ -9,6 +9,7 @@ pub mod time;
 pub mod libgen;
 pub mod stdio;
 pub mod signal;
+pub mod stdlib;
 
 #[link(name = "c")]
 extern {
