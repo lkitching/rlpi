@@ -23,9 +23,9 @@ mod timers;
 mod procexec;
 mod curr_time;
 
-use crate::procexec::{exit_handlers};
+use crate::procexec::{fork_stdio_buf};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    exit_handlers::main(&args);
+    fork_stdio_buf::main(&args);
 }
