@@ -23,9 +23,9 @@ mod timers;
 mod procexec;
 mod curr_time;
 
-use crate::procexec::{multi_wait};
+use crate::procexec::{child_status};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    multi_wait::main(&args);
+    child_status::main(&args);
 }
