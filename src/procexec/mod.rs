@@ -4,3 +4,4 @@ pub mod fork_whos_on_first;
 pub mod fork_sig_sync;
 pub mod exit_handlers;
 pub mod fork_stdio_buf;
+pub mod multi_wait;
