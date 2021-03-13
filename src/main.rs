@@ -23,9 +23,9 @@ mod timers;
 mod procexec;
 mod curr_time;
 
-use crate::procexec::{child_status};
+use crate::procexec::{make_zombie};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    child_status::main(&args);
+    make_zombie::main(&args);
 }

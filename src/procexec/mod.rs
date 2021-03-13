@@ -7,3 +7,4 @@ pub mod fork_stdio_buf;
 pub mod multi_wait;
 pub mod child_status;
 pub mod print_wait_status;
+pub mod make_zombie;
