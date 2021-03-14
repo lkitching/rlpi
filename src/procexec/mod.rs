@@ -8,3 +8,4 @@ pub mod multi_wait;
 pub mod child_status;
 pub mod print_wait_status;
 pub mod make_zombie;
+pub mod multi_sigchld;
