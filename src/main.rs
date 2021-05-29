@@ -23,9 +23,9 @@ mod timers;
 mod procexec;
 mod curr_time;
 
-use crate::procexec::{t_system};
+use crate::procexec::{acct_on};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    t_system::main(&args);
+    acct_on::main(&args);
 }
