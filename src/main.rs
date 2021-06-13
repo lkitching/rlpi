@@ -23,9 +23,9 @@ mod timers;
 mod procexec;
 mod curr_time;
 
-use crate::procexec::{acct_view};
+use crate::procexec::{t_clone};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    acct_view::main(&args);
+    t_clone::main(&args);
 }

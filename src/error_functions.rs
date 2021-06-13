@@ -6,7 +6,7 @@ use std::io::{Write};
 use crate::ename;
 use crate::libc::{strerror, read_char_ptr, abort, _exit, exit, errno, set_errno, ExitStatus};
 
-fn str_error(errnum: c_int) -> String {
+pub fn str_error(errnum: c_int) -> String {
     let chars = unsafe { strerror(errnum) };
     read_char_ptr(chars)
 }

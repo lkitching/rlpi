@@ -14,3 +14,4 @@ pub mod simple_system;
 pub mod system;
 pub mod acct_on;
 pub mod acct_view;
+pub mod t_clone;
