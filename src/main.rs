@@ -22,10 +22,11 @@ mod signals;
 mod timers;
 mod procexec;
 mod curr_time;
+mod tty;
 
-use crate::procexec::{t_clone};
+use crate::tty::{new_intr};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    t_clone::main(&args);
+    new_intr::main(&args);
 }
