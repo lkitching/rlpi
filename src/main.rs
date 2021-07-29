@@ -24,9 +24,9 @@ mod procexec;
 mod curr_time;
 mod tty;
 
-use crate::tty::{new_intr};
+use crate::tty::{no_echo};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    new_intr::main(&args);
+    no_echo::main(&args);
 }
