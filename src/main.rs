@@ -23,10 +23,11 @@ mod timers;
 mod procexec;
 mod curr_time;
 mod tty;
+mod pty;
 
-use crate::tty::{demo_sigwinch};
+use crate::pty::{script};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    demo_sigwinch::main(&args);
+    script::main(&args);
 }
