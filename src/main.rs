@@ -24,9 +24,9 @@ mod procexec;
 mod curr_time;
 mod tty;
 
-use crate::tty::{test_tty_functions};
+use crate::tty::{demo_sigwinch};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    test_tty_functions::main(&args);
+    demo_sigwinch::main(&args);
 }
