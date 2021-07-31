@@ -26,9 +26,9 @@ mod tty;
 mod pty;
 mod pgsjc;
 
-use crate::pgsjc::{catch_sighup};
+use crate::pgsjc::{disc_sighup};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    catch_sighup::main(&args);
+    disc_sighup::main(&args);
 }
