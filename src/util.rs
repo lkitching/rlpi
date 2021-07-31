@@ -2,11 +2,12 @@ use std::ffi::{CStr, CString};
 use std::mem;
 use std::fmt;
 use std::str::{FromStr};
-use libc::{tm};
-use std::os::raw::{c_char};
+use libc::{tm, fork};
+use std::os::raw::{c_char, c_int};
 
 use crate::libc::{environ};
 use crate::libc::time::{strftime};
+use crate::error_functions::{err_exit};
 
 //displays each environment variable
 pub fn display_env() {
@@ -74,5 +75,28 @@ pub fn numeric_arg_or<T>(args: &[String], index: usize, default: T) -> T where
 	T::from_str(args[index].as_str()).expect("Invalid number")
     } else {
 	default
+    }
+}
+
+pub enum ForkResult {
+    Parent(c_int),
+    Child
+}
+
+pub fn fork_or_die() -> ForkResult {
+    match try_fork() {
+	Ok(r) => { r },
+	Err(msg) => {
+	    err_exit(&msg);
+	}
+    }
+}
+
+pub fn try_fork() -> Result<ForkResult, String> {
+    let child_pid = unsafe { fork() };
+    match child_pid {
+	-1 => { Err(String::from("fork failed")) },
+	0 => { Ok(ForkResult::Child) },
+	_ => { Ok(ForkResult::Parent(child_pid)) }
     }
 }
