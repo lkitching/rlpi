@@ -9,3 +9,7 @@ edition = "2018"
 [dependencies]
 libc = "0.2"
 clap = "2.33.3"
+
+[[bin]]
+name="job_mon"
+path="src/pgsjc/job_mon.rs"
