@@ -24,10 +24,11 @@ mod procexec;
 mod curr_time;
 mod tty;
 mod pty;
+mod pgsjc;
 
-use crate::pty::{script};
+use crate::pgsjc::{t_setsid};
 
 fn main() {
     let mut args: Vec<String> = env::args().collect();
-    script::main(&args);
+    t_setsid::main(&args);
 }
