@@ -13,3 +13,7 @@ clap = "2.33.3"
 [[bin]]
 name="job_mon"
 path="src/pgsjc/job_mon.rs"
+
+[[bin]]
+name="handling_sigtstp"
+path="src/pgsjc/handling_sigtstp.rs"
