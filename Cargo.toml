@@ -17,3 +17,7 @@ path="src/pgsjc/job_mon.rs"
 [[bin]]
 name="handling_sigtstp"
 path="src/pgsjc/handling_sigtstp.rs"
+
+[[bin]]
+name="orphaned_pgrp_sighup"
+path="src/pgsjc/orphaned_pgrp_sighup.rs"
