@@ -21,3 +21,7 @@ path="src/pgsjc/handling_sigtstp.rs"
 [[bin]]
 name="orphaned_pgrp_sighup"
 path="src/pgsjc/orphaned_pgrp_sighup.rs"
+
+[[bin]]
+name="t_setpriority"
+path="src/procpri/t_setpriority.rs"
