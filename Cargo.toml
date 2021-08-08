@@ -25,3 +25,7 @@ path="src/pgsjc/orphaned_pgrp_sighup.rs"
 [[bin]]
 name="t_setpriority"
 path="src/procpri/t_setpriority.rs"
+
+[[bin]]
+name="rlimit_nproc"
+path="src/procres/rlimit_nproc.rs"
