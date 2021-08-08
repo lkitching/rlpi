@@ -25,3 +25,4 @@ pub mod curr_time;
 pub mod tty;
 pub mod pty;
 pub mod pgsjc;
+pub mod procres;
