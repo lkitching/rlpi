@@ -9,6 +9,7 @@ edition = "2018"
 [dependencies]
 libc = "0.2"
 clap = "2.33.3"
+chrono = "0.4"
 
 [[bin]]
 name="job_mon"
@@ -29,3 +30,7 @@ path="src/procpri/t_setpriority.rs"
 [[bin]]
 name="rlimit_nproc"
 path="src/procres/rlimit_nproc.rs"
+
+[[bin]]
+name="daemon_sighup"
+path="src/daemons/daemon_sighup.rs"

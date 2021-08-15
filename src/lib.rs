@@ -26,3 +26,4 @@ pub mod tty;
 pub mod pty;
 pub mod pgsjc;
 pub mod procres;
+pub mod daemons;
