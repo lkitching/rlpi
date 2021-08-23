@@ -34,3 +34,7 @@ path="src/procres/rlimit_nproc.rs"
 [[bin]]
 name="daemon_sighup"
 path="src/daemons/daemon_sighup.rs"
+
+[[bin]]
+name="simple_pipe"
+path="src/pipes/simple_pipe.rs"
