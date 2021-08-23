@@ -42,3 +42,7 @@ path="src/pipes/simple_pipe.rs"
 [[bin]]
 name="pipe_sync"
 path="src/pipes/pipe_sync.rs"
+
+[[bin]]
+name="pipe_ls_wc"
+path="src/pipes/pipe_ls_wc.rs"

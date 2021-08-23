@@ -8,21 +8,7 @@ extern crate rlpi;
 use rlpi::error_functions::{usage_err, err_exit, fatal};
 use rlpi::curr_time::{curr_time};
 use rlpi::libc::stdio::{stdout};
-use rlpi::util::{ForkResult, try_fork};
-
-struct Pipe {
-    read_fd: c_int,
-    write_fd: c_int
-}
-
-fn create_pipe() -> Result<Pipe, ()> {
-    let mut pipe_fds: [c_int; 2] = [0; 2];
-    if unsafe { pipe(pipe_fds.as_mut_ptr()) } == -1 {
-	Err(())
-    } else {
-	Ok(Pipe { read_fd: pipe_fds[0], write_fd: pipe_fds[1] })
-    }
-}
+use rlpi::util::{ForkResult, try_fork, Pipe, create_pipe};
 
 pub fn main() {
     let args: Vec<String> = env::args().collect();

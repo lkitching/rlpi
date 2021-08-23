@@ -2,7 +2,7 @@ use std::ffi::{CStr, CString};
 use std::mem;
 use std::fmt;
 use std::str::{FromStr};
-use libc::{tm, fork};
+use libc::{tm, fork, pipe};
 use std::os::raw::{c_char, c_int};
 
 use crate::libc::{environ};
@@ -98,5 +98,19 @@ pub fn try_fork() -> Result<ForkResult, String> {
 	-1 => { Err(String::from("fork failed")) },
 	0 => { Ok(ForkResult::Child) },
 	_ => { Ok(ForkResult::Parent(child_pid)) }
+    }
+}
+
+pub struct Pipe {
+    pub read_fd: c_int,
+    pub write_fd: c_int
+}
+
+pub fn create_pipe() -> Result<Pipe, ()> {
+    let mut pipe_fds: [c_int; 2] = [0; 2];
+    if unsafe { pipe(pipe_fds.as_mut_ptr()) } == -1 {
+	Err(())
+    } else {
+	Ok(Pipe { read_fd: pipe_fds[0], write_fd: pipe_fds[1] })
     }
 }
