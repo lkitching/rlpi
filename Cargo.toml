@@ -10,6 +10,7 @@ edition = "2018"
 libc = "0.2"
 clap = "2.33.3"
 chrono = "0.4"
+regex = "1"
 
 [[bin]]
 name="job_mon"
@@ -46,3 +47,7 @@ path="src/pipes/pipe_sync.rs"
 [[bin]]
 name="pipe_ls_wc"
 path="src/pipes/pipe_ls_wc.rs"
+
+[[bin]]
+name="popen_glob"
+path="src/pipes/popen_glob.rs"
