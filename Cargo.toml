@@ -38,3 +38,7 @@ path="src/daemons/daemon_sighup.rs"
 [[bin]]
 name="simple_pipe"
 path="src/pipes/simple_pipe.rs"
+
+[[bin]]
+name="pipe_sync"
+path="src/pipes/pipe_sync.rs"
