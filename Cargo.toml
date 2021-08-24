@@ -51,3 +51,11 @@ path="src/pipes/pipe_ls_wc.rs"
 [[bin]]
 name="popen_glob"
 path="src/pipes/popen_glob.rs"
+
+[[bin]]
+name="fifo_seqnum_server"
+path="src/pipes/fifo_seqnum_server.rs"
+
+[[bin]]
+name="fifo_seqnum_client"
+path="src/pipes/fifo_seqnum_client.rs"

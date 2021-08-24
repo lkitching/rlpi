@@ -27,3 +27,4 @@ pub mod pty;
 pub mod pgsjc;
 pub mod procres;
 pub mod daemons;
+pub mod pipes;
