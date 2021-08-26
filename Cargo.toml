@@ -59,3 +59,7 @@ path="src/pipes/fifo_seqnum_server.rs"
 [[bin]]
 name="fifo_seqnum_client"
 path="src/pipes/fifo_seqnum_client.rs"
+
+[[bin]]
+name="svmsg_create"
+path="src/svmsg/svmsg_create.rs"
