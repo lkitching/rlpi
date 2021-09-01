@@ -79,3 +79,7 @@ path="src/svmsg/svmsg_rm.rs"
 [[bin]]
 name="svmsg_chqbytes"
 path="src/svmsg/svmsg_chqbytes.rs"
+
+[[bin]]
+name="svmsg_ls"
+path="src/svmsg/svmsg_ls.rs"
