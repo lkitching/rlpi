@@ -71,3 +71,7 @@ path="src/svmsg/svmsg_send.rs"
 [[bin]]
 name="svmsg_receive"
 path="src/svmsg/svmsg_receive.rs"
+
+[[bin]]
+name="svmsg_rm"
+path="src/svmsg/svmsg_rm.rs"
