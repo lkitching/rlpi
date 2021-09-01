@@ -75,3 +75,7 @@ path="src/svmsg/svmsg_receive.rs"
 [[bin]]
 name="svmsg_rm"
 path="src/svmsg/svmsg_rm.rs"
+
+[[bin]]
+name="svmsg_chqbytes"
+path="src/svmsg/svmsg_chqbytes.rs"
