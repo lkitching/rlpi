@@ -1,5 +1,8 @@
 use std::env;
 
+#[macro_use]
+extern crate memoffset;
+
 pub mod libc;
 pub mod error_functions;
 pub mod ename;
@@ -28,3 +31,4 @@ pub mod pgsjc;
 pub mod procres;
 pub mod daemons;
 pub mod pipes;
+pub mod svmsg;

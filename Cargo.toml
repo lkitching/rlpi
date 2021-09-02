@@ -11,6 +11,7 @@ libc = "0.2"
 clap = "2.33.3"
 chrono = "0.4"
 regex = "1"
+memoffset = "0.6.4"
 
 [[bin]]
 name="job_mon"
@@ -83,3 +84,11 @@ path="src/svmsg/svmsg_chqbytes.rs"
 [[bin]]
 name="svmsg_ls"
 path="src/svmsg/svmsg_ls.rs"
+
+[[bin]]
+name="svmsg_file_server"
+path="src/svmsg/svmsg_file_server.rs"
+
+[[bin]]
+name="svmsg_file_client"
+path="src/svmsg/svmsg_file_client.rs"
