@@ -6,17 +6,7 @@ use libc::{semget, IPC_PRIVATE, S_IRUSR, S_IWUSR, semctl, semid_ds, seminfo, sem
 
 use rlpi::error_functions::{usage_err, err_exit};
 use rlpi::curr_time::curr_time;
-
-// defined in <bits/sem.h>
-const SETVAL: c_int = 16;
-
-#[repr(C)]
-union semun {
-    val: c_int,
-    buf: *const semid_ds,
-    array: *const c_ushort,
-    __buf: *const seminfo
-}
+use rlpi::libc::sys::sem::{semun, SETVAL};
 
 pub fn main() {
     let args: Vec<String> = env::args().collect();
