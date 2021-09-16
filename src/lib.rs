@@ -32,3 +32,4 @@ pub mod procres;
 pub mod daemons;
 pub mod pipes;
 pub mod svmsg;
+pub mod svsem;

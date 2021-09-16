@@ -100,3 +100,7 @@ path="src/svsem/svsem_demo.rs"
 [[bin]]
 name="svsem_mon"
 path="src/svsem/svsem_mon.rs"
+
+[[bin]]
+name="svsem_setall"
+path="src/svsem/svsem_setall.rs"
