@@ -1,7 +1,6 @@
 use std::iter::{Iterator};
 use std::ffi::{CStr, CString};
 use libc::{uid_t, gid_t, passwd, getpwuid, getpwnam, getgrgid, getgrnam, getpwent, exit, EXIT_SUCCESS};
-use crate::error_functions::{usage_err};
 
 fn read_user_name(p: *mut passwd) -> String {
     let cs = unsafe { CStr::from_ptr((*p).pw_name).to_str().expect("Cannot create str") };

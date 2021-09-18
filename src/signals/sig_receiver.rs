@@ -73,7 +73,7 @@ pub fn main(args: &[String]) -> ! {
     if args.len() > 1 {
 	let num_secs = args[1].parse().expect("Invalid sleep period");
 
-	let mut blocking_mask = unsafe { MaybeUninit::uninit() };
+	let mut blocking_mask = MaybeUninit::uninit();
 	unsafe { sigfillset(blocking_mask.as_mut_ptr()); }
 	let blocking_mask = unsafe { blocking_mask.assume_init() };
 
@@ -85,7 +85,7 @@ pub fn main(args: &[String]) -> ! {
 	unsafe { sleep(num_secs); }
 
 	//get pending signals
-	let mut pending_mask = unsafe { MaybeUninit::uninit() };
+	let mut pending_mask = MaybeUninit::uninit();
 	if unsafe { sigpending(pending_mask.as_mut_ptr()) } == -1 {
 	    err_exit("sigpending");
 	}
@@ -95,7 +95,7 @@ pub fn main(args: &[String]) -> ! {
 	print_sigset(unsafe { stdout }, "\t\t", &pending_mask);
 
 	//unblock all signals
-	let mut empty_mask = unsafe { MaybeUninit::uninit() };
+	let mut empty_mask = MaybeUninit::uninit();
 	if unsafe { sigemptyset(empty_mask.as_mut_ptr()) } == -1 {
 	    err_exit("sigprocmask");
 	}

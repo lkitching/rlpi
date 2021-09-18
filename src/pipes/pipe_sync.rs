@@ -1,14 +1,14 @@
 //listing 44-3 (page 897)
 use std::{env, ptr, thread, time};
-use std::os::raw::{c_int, c_void};
+use std::os::raw::{c_void};
 
-use libc::{setbuf, exit, _exit, EXIT_SUCCESS, pipe, close, getpid, read};
+use libc::{setbuf, exit, _exit, EXIT_SUCCESS, close, getpid, read};
 
 extern crate rlpi;
 use rlpi::error_functions::{usage_err, err_exit, fatal};
 use rlpi::curr_time::{curr_time};
 use rlpi::libc::stdio::{stdout};
-use rlpi::util::{ForkResult, try_fork, Pipe, create_pipe};
+use rlpi::util::{ForkResult, try_fork, create_pipe};
 
 pub fn main() {
     let args: Vec<String> = env::args().collect();
@@ -23,7 +23,7 @@ pub fn main() {
 
     let pipe = create_pipe().expect("Failed to create pipe");
 
-    for j in (1 .. args.len()) {
+    for j in 1 .. args.len() {
 	match try_fork() {
 	    Err(_) => { err_exit(&format!("fork {}", j)); },
 	    Ok(ForkResult::Parent(_)) => {

@@ -1,6 +1,5 @@
 //listing 35-1 (page 736)
 use std::env;
-use std::collections::{HashMap};
 
 use libc::{__priority_which_t, getpriority, setpriority, exit, EXIT_SUCCESS, PRIO_PROCESS, PRIO_PGRP, PRIO_USER};
 

@@ -4,7 +4,6 @@ use std::process;
 
 use clap::{App, Arg};
 use libc::{msgsnd, IPC_NOWAIT};
-use std::ffi::CString;
 
 extern crate rlpi;
 use rlpi::error_functions::{err_exit};

@@ -1,9 +1,7 @@
 //listing 23-1 (page 482)
 use std::ptr;
-use std::str::{FromStr};
 use std::mem::{MaybeUninit};
 use std::sync::atomic::{AtomicUsize, AtomicBool, Ordering, AtomicI64};
-use std::fmt;
 use std::os::raw::{c_int};
 
 use libc::{timeval, gettimeofday, itimerval, exit, EXIT_SUCCESS, ITIMER_REAL, sigaction, sighandler_t, SIGALRM};
@@ -39,7 +37,7 @@ fn display_times(msg: &str, include_timer: bool) {
     let call_num = CALL_NUM.fetch_add(1, Ordering::SeqCst);
 
     if call_num == 0 {
-	let mut start: MaybeUninit<timeval> = unsafe { MaybeUninit::uninit() };
+	let mut start: MaybeUninit<timeval> = MaybeUninit::uninit();
 	if unsafe { gettimeofday(start.as_mut_ptr(), ptr::null_mut()) } == -1 {
 	    err_exit("gettimeofday");
 	} else {
@@ -63,7 +61,7 @@ fn display_times(msg: &str, include_timer: bool) {
     print!("{} {}", msg, elapsed);
 
     if include_timer {
-	let mut itv: MaybeUninit::<itimerval> = unsafe { MaybeUninit::uninit() };
+	let mut itv: MaybeUninit::<itimerval> = MaybeUninit::uninit();
 	if unsafe { getitimer(ITIMER_REAL, itv.as_mut_ptr()) } == -1 {
 	    err_exit("getitimer");
 	}

@@ -1,8 +1,8 @@
 // listing 47-1 (page 968)
 use std::env;
-use std::os::raw::{c_int, c_ushort};
+use std::os::raw::{c_int};
 
-use libc::{semget, IPC_PRIVATE, S_IRUSR, S_IWUSR, semctl, semid_ds, seminfo, sembuf, getpid, semop};
+use libc::{semget, IPC_PRIVATE, S_IRUSR, S_IWUSR, semctl, sembuf, getpid, semop};
 
 use rlpi::error_functions::{usage_err, err_exit};
 use rlpi::curr_time::curr_time;

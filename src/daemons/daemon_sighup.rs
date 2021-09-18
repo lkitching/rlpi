@@ -1,10 +1,8 @@
 //listing 37-3 (page 774)
-use std::env;
 use std::ptr;
 use std::os::raw::{c_int, c_uint};
-use std::ops::{AddAssign};
 use std::fs::{OpenOptions, File};
-use std::io::{Read, Write, BufWriter, Result};
+use std::io::{Read, Write, BufWriter};
 
 use libc::{sigaction, sighandler_t, SA_RESTART, SIGHUP, sleep};
 use chrono::prelude::{Local};
@@ -14,14 +12,13 @@ use rlpi::signals::signal_functions::{sig_empty_set};
 use rlpi::daemons::become_daemon::{become_daemon};
 use rlpi::error_functions::{err_exit};
 
-extern "C" fn sighup_handler(sig: c_int) {
+extern "C" fn sighup_handler(_sig: c_int) {
     unsafe { HUP_RECEIVED = true; }
 }
 
 static mut HUP_RECEIVED: bool = false;
 
 pub fn main() {
-    let args: Vec<String> = env::args().collect();    
     let log_path = "/tmp/ds.log";    
     let config_file = "/tmp/ds.conf";
 
@@ -37,11 +34,11 @@ pub fn main() {
 
     // install handler for SIGHUP
     if unsafe { sigaction(SIGHUP, &sa, ptr::null_mut()) } == -1 {
-	err_exit("sigaction");
+        err_exit("sigaction");
     }
 
     if let Err(msg) = become_daemon(0) {
-	err_exit("become_daemon");
+        err_exit(&format!("become_daemon: {}", msg));
     }
 
     let mut unslept = SLEEP_TIME;

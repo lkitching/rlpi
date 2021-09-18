@@ -29,7 +29,7 @@ pub fn main(args: &[String]) -> ! {
 		if status == -1 {
 		    err_exit("system");
 		} else {
-		    if unsafe { WIFEXITED(status) } && unsafe { WEXITSTATUS(status) == 127 } {
+		    if WIFEXITED(status) && WEXITSTATUS(status) == 127 {
 			println!("(Probably) could not invoke shell");
 		    } else {
 			print_wait_status(None, status);

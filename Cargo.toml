@@ -108,3 +108,7 @@ path="src/svsem/svsem_setall.rs"
 [[bin]]
 name="svsem_op"
 path="src/svsem/svsem_op.rs"
+
+[[bin]]
+name="t_setsid"
+path="src/pgsjc/t_setsid.rs"

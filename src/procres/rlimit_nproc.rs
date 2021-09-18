@@ -1,6 +1,5 @@
 //listing 36-3 (page 758)
 use std::env;
-use std::ops::{AddAssign};
 
 use libc::{RLIMIT_NPROC, RLIM_INFINITY, _exit, EXIT_SUCCESS, rlimit, setrlimit, rlim_t};
 
@@ -21,22 +20,22 @@ pub fn main() {
     let args: Vec<String> = env::args().collect();
 
     if args.len() < 2 || args.len() > 3 || args[1] == "--help" {
-	usage_err(&format!("{} soft-limit [hard-limit]", args[0]));
+		usage_err(&format!("{} soft-limit [hard-limit]", args[0]));
     }
 
-    print_rlimit("Initial maximum process limits: ", RLIMIT_NPROC);
+    print_rlimit("Initial maximum process limits: ", RLIMIT_NPROC).expect("Failed to print");
 
     // set new process limits (hard == soft if not specified)
     let rl = rlimit {
-	rlim_cur: parse_limit(args.get(1).map(|s| s.as_str())),
-	rlim_max: parse_limit(args.get(2).map(|s| s.as_str()))
+		rlim_cur: parse_limit(args.get(1).map(|s| s.as_str())),
+		rlim_max: parse_limit(args.get(2).map(|s| s.as_str()))
     };
 
     if unsafe { setrlimit(RLIMIT_NPROC, &rl) } == -1 {
-	err_exit("setrlimit");
+		err_exit("setrlimit");
     }
 
-    print_rlimit("New maximum process limits: ", RLIMIT_NPROC);
+    print_rlimit("New maximum process limits: ", RLIMIT_NPROC).expect("Failed to print");
 
     // create as many children as possible
     let mut j = 1;

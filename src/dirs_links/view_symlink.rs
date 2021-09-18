@@ -12,7 +12,7 @@ pub fn main(args: &[String]) -> ! {
 	usage_err(&format!("{} pathname\n", args[0]));
     }
 
-    let mut statbuf = unsafe { MaybeUninit::uninit() };
+    let mut statbuf = MaybeUninit::uninit();
     let path = args[1].as_str();
     let path_s = unsafe { CString::new(path).expect("Failed to create CString") };
 

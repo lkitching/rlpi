@@ -63,7 +63,7 @@ pub fn main(args: &[String]) -> ! {
 	err_exit("timerfd_settime");
     }
 
-    let mut start: MaybeUninit::<timespec> = unsafe { MaybeUninit::uninit() };
+    let mut start: MaybeUninit::<timespec> = MaybeUninit::uninit();
     
     if unsafe { clock_gettime(CLOCK_MONOTONIC, start.as_mut_ptr()) } == -1 {
 	err_exit("clock_gettime");
@@ -84,7 +84,7 @@ pub fn main(args: &[String]) -> ! {
 
 	total_exp = total_exp + num_exp;
 
-	let mut now: MaybeUninit::<timespec> = unsafe { MaybeUninit::uninit() };
+	let mut now: MaybeUninit::<timespec> = MaybeUninit::uninit();
 	if unsafe { clock_gettime(CLOCK_MONOTONIC, now.as_mut_ptr()) } == -1 {
 	    err_exit("clock_gettime");
 	}

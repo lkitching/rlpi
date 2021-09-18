@@ -35,14 +35,14 @@ pub fn main(args: &[String]) -> ! {
 	err_exit("sigaction");
     }
 
-    let mut start: MaybeUninit::<timeval> = unsafe { MaybeUninit::uninit() };
+    let mut start: MaybeUninit::<timeval> = MaybeUninit::uninit();
     if unsafe { gettimeofday(start.as_mut_ptr(), ptr::null_mut()) } == -1 {
 	err_exit("gettimeofday");
     }
     let start = unsafe { start.assume_init() };
 
     loop {
-	let mut remain: MaybeUninit<timespec> = unsafe { MaybeUninit::uninit() };
+	let mut remain: MaybeUninit<timespec> = MaybeUninit::uninit();
 	let s = unsafe { nanosleep(&request, remain.as_mut_ptr()) };
 	if s == -1 && errno() != EINTR {
 	    err_exit("nanosleep");
@@ -50,7 +50,7 @@ pub fn main(args: &[String]) -> ! {
 
 	let remain = unsafe { remain.assume_init() };
 
-	let mut finish: MaybeUninit::<timeval> = unsafe { MaybeUninit::uninit() };
+	let mut finish: MaybeUninit::<timeval> = MaybeUninit::uninit();
 	if unsafe { gettimeofday(finish.as_mut_ptr(), ptr::null_mut()) } == -1 {
 	    err_exit("gettimeofday");
 	}

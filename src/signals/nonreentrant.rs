@@ -1,11 +1,10 @@
 //listing 21-1 (page 424)
 use std::os::raw::{c_char, c_int, c_void};
 use std::ffi::{CString};
-use std::mem::{MaybeUninit};
 use std::ptr;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
-use libc::{strdup, sigemptyset, sigaction, sighandler_t, SIGINT, strcmp};
+use libc::{strdup, sigaction, sighandler_t, SIGINT, strcmp};
 
 use crate::error_functions::{usage_err, err_exit};
 use super::signal_functions::{sig_empty_set};
@@ -26,11 +25,11 @@ pub fn main(args: &[String]) {
 	usage_err(&format!("{} str1 str2\n", args[0]));
     }
 
-    let str1_s = unsafe { CString::new(args[1].as_str()).expect("Failed to create CString") };
+    let str1_s = CString::new(args[1].as_str()).expect("Failed to create CString");
     let buf = unsafe { crypt(str1_s.as_ptr(), SALT_BUF.as_ptr()) };
     let cr1 = unsafe { strdup(buf) };
 
-    let str2_s = unsafe { CString::new(args[2].as_str()).expect("Failed to create CString") };
+    let str2_s = CString::new(args[2].as_str()).expect("Failed to create CString");
     STR2_BUF.store(str2_s.as_ptr() as usize, Ordering::SeqCst);
 
     if cr1.is_null() {

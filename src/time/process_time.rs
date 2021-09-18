@@ -1,6 +1,6 @@
 //listing 10-5 (page 209)
 use std::os::raw::{c_long};
-use libc::{sysconf, _SC_CLK_TCK, exit, EXIT_SUCCESS, getppid, tms, times, clock_t};
+use libc::{sysconf, _SC_CLK_TCK, exit, EXIT_SUCCESS, getppid, tms, times};
 use std::mem::MaybeUninit;
 
 use crate::libc::time::{clock, CLOCKS_PER_SEC};

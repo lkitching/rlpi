@@ -2,7 +2,6 @@
 use std::process;
 use clap::{App, Arg, ArgMatches};
 use std::os::raw::c_int;
-use std::ops::{BitOrAssign};
 
 use libc::{IPC_CREAT, IPC_EXCL, IPC_PRIVATE, S_IRUSR, S_IWUSR, mode_t, key_t, ftok, msgget};
 use std::ffi::CString;

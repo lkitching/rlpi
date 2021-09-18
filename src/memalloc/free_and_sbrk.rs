@@ -1,7 +1,7 @@
 //listing 7.1 (page 142)
 use std::fmt::{Display};
 use std::str::{FromStr};
-use libc::{exit, EXIT_SUCCESS, sbrk, size_t, malloc, free};
+use libc::{exit, EXIT_SUCCESS, sbrk, malloc, free};
 use crate::error_functions::{usage_err, err_exit, cmd_line_err};
 
 fn parse_gt<T: FromStr + Display + PartialOrd>(s: &str, min_exclusive: T, arg_name: &str) -> T {

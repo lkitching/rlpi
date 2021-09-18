@@ -54,7 +54,7 @@ pub fn main() {
 	    }
 	    unsafe { _exit(EXIT_SUCCESS); }
 	},
-	ForkResult::Parent(child_pid) => {
+	ForkResult::Parent(_child_pid) => {
 	    // parent writes CLI argument to pipe
 	    // read end is unused
 	    if unsafe { close(pipe_fds[0]) } == -1 {

@@ -30,7 +30,7 @@ pub fn main(args: &[String]) -> ! {
 
     // fetch current terminal settings, modify INTR character and push
     // changes back to the terminal driver
-    let mut tp: MaybeUninit<termios> = unsafe { MaybeUninit::uninit() };
+    let mut tp: MaybeUninit<termios> = MaybeUninit::uninit();
     if unsafe { tcgetattr(STDIN_FILENO, tp.as_mut_ptr()) } == -1 {
 	err_exit("tcgetattr");
     }

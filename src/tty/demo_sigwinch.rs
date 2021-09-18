@@ -1,6 +1,6 @@
 //listing 62-5 (page 1320)
 use std::ptr;
-use std::os::raw::{c_int, c_void};
+use std::os::raw::{c_int};
 use std::mem::{MaybeUninit};
 
 use libc::{SIGWINCH, winsize, pause, sigaction, sighandler_t, ioctl, STDIN_FILENO, TIOCGWINSZ};

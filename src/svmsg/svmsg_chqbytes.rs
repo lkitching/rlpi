@@ -17,7 +17,7 @@ pub fn main() {
 
     let mut ds = unsafe {
         let mut ds: MaybeUninit<msqid_ds> = MaybeUninit::uninit();
-        if unsafe { msgctl(msqid, IPC_STAT, ds.as_mut_ptr()) } == -1 {
+        if msgctl(msqid, IPC_STAT, ds.as_mut_ptr()) == -1 {
             err_exit("msgctl");
         }
         ds.assume_init()

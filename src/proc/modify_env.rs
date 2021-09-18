@@ -3,7 +3,6 @@
 use std::ffi::{CString};
 use libc::{clearenv, putenv, setenv, unsetenv, exit, EXIT_SUCCESS};
 use crate::util::{display_env};
-use crate::libc::{environ};
 use crate::error_functions::{err_exit};
 
 pub fn main(args: &[String]) -> ! {

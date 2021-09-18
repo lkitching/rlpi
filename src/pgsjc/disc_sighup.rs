@@ -1,7 +1,6 @@
 //listing 34-4 (page 712)
 use std::os::raw::{c_int};
 use std::ptr;
-use std::io::{self,Write};
 
 use libc::{setbuf, getpid, tcgetpgrp, STDIN_FILENO, setpgid, sigaction, alarm, pause, sighandler_t, getpgrp, SIGHUP};
 

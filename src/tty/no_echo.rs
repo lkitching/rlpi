@@ -9,7 +9,7 @@ use crate::libc::stdio::{stdout};
 
 pub fn main(args: &[String]) -> ! {
     // retrieve current terminal settings and turn off echoing
-    let mut tp: MaybeUninit<termios> = unsafe { MaybeUninit::uninit() };
+    let mut tp: MaybeUninit<termios> = MaybeUninit::uninit();
     if unsafe { tcgetattr(STDIN_FILENO, tp.as_mut_ptr()) } == -1 {
 	err_exit("tcgetattr");
     }

@@ -2,7 +2,6 @@
 use libc::{exit, EXIT_SUCCESS, uname, utsname};
 use std::mem::MaybeUninit;
 
-use crate::libc::{read_char_ptr};
 use crate::util::{read_str};
 use crate::error_functions::{err_exit};
 

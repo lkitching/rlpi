@@ -4,7 +4,7 @@ use std::ffi::{CString};
 
 use std::mem::{self, MaybeUninit};
 use std::os::raw::{c_void, c_int};
-use libc::{stat, iovec, ssize_t, exit, EXIT_SUCCESS, readv, size_t, open, O_RDONLY};
+use libc::{stat, iovec, exit, EXIT_SUCCESS, readv, size_t, open, O_RDONLY};
 use crate::error_functions::{usage_err, err_exit};
 
 pub fn main(args: &[String]) -> ! {

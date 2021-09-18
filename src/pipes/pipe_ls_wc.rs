@@ -1,19 +1,17 @@
 //listing 44-4 (page 900)
 
-use std::{env,ptr};
+use std::{ptr};
 use std::ffi::{CString};
 use std::os::raw::{c_char};
 
 use libc::{close, dup2, STDOUT_FILENO, STDIN_FILENO, execlp, wait, exit, EXIT_SUCCESS};
 
 extern crate rlpi;
-use rlpi::util::{Pipe, create_pipe, ForkResult, fork_or_die};
+use rlpi::util::{create_pipe, ForkResult, fork_or_die};
 use rlpi::error_functions::{err_exit};
 
 pub fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let pipe = create_pipe().expect("Failed to create pipe");
+	let pipe = create_pipe().expect("Failed to create pipe");
 
     if let ForkResult::Child = fork_or_die() {
 	// first child

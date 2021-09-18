@@ -1,21 +1,19 @@
 // listing 46-8 (page 957)
 use std::ptr;
-use std::ffi::{CStr, CString};
+use std::ffi::{CString};
 use std::os::raw::{c_int, c_void};
-use std::mem;
 
 use libc::{msgget, IPC_CREAT, IPC_EXCL, S_IRUSR, S_IWUSR, S_IWGRP, sigaction, sighandler_t, SA_RESTART, SIGCHLD,
-           msgctl, msgrcv, EINTR, _exit, EXIT_SUCCESS, EXIT_FAILURE, exit, IPC_RMID, O_RDONLY, open, msgsnd, read, size_t,
+           msgctl, _exit, EXIT_SUCCESS, EXIT_FAILURE, exit, IPC_RMID, O_RDONLY, open, msgsnd, read, size_t,
            waitpid, WNOHANG};
 
 use rlpi::svmsg::svmsg_file::*;
 use rlpi::error_functions::{err_exit, err_msg};
 use rlpi::signals::signal_functions::sig_empty_set;
-use std::mem::MaybeUninit;
 use rlpi::libc::{errno, set_errno};
 use rlpi::util::{ForkResult, try_fork};
 
-extern "C" fn grim_reaper(sig: c_int) {
+extern "C" fn grim_reaper(_sig: c_int) {
     // waitpid() might change errno
     let saved_errno = errno();
 
@@ -43,7 +41,7 @@ fn serve_request(req: &QueueData<RequestMessage>) {
         let data = ResponseMessage::failure_response("Couldn't open");
 
         unsafe {
-            data.send_message(client_queue_id);
+            data.send_message(client_queue_id).expect("Failed to send failure message");
             exit(EXIT_FAILURE);
         }
     }

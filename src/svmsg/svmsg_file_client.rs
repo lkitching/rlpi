@@ -1,18 +1,16 @@
 // listing 46-9 (page 960)
 use std::env;
 use std::ptr;
-use std::ffi::{CString, c_void};
 use std::path::{Path};
 
-use libc::{PATH_MAX, msgget, S_IRUSR, S_IWUSR, S_IWGRP, atexit, msgctl, IPC_RMID, msgsnd, msgrcv, exit, EXIT_SUCCESS, EXIT_FAILURE,
+use libc::{msgget, S_IRUSR, S_IWUSR, S_IWGRP, atexit, msgctl, IPC_RMID, exit, EXIT_SUCCESS, EXIT_FAILURE,
            IPC_PRIVATE};
 
 use rlpi::svmsg::svmsg_file::*;
-use rlpi::error_functions::{usage_err, cmd_line_err, err_exit};
+use rlpi::error_functions::{usage_err, err_exit};
 use std::os::raw::c_int;
-use std::mem::MaybeUninit;
 
-static mut client_queue_id: c_int = -1;
+static mut CLIENT_QUEUE_ID: c_int = -1;
 
 fn remove_queue_by_id(id: c_int) {
     if unsafe { msgctl(id, IPC_RMID, ptr::null_mut()) } == -1 {
@@ -21,7 +19,7 @@ fn remove_queue_by_id(id: c_int) {
 }
 
 extern "C" fn remove_queue() {
-    let client_id = unsafe { client_queue_id };
+    let client_id = unsafe { CLIENT_QUEUE_ID };
     if client_id != -1 {
         remove_queue_by_id(client_id);
     }
@@ -47,7 +45,7 @@ pub fn main() {
         err_exit("msgget - client message queue");
     }
     unsafe {
-        client_queue_id = client_id;
+        CLIENT_QUEUE_ID = client_id;
         atexit(remove_queue);
     }
 

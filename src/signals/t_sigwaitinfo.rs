@@ -1,6 +1,5 @@
 use std::{ptr, time, thread};
 use std::mem::{MaybeUninit};
-use std::os::raw::{c_int};
 
 use libc::{exit, EXIT_SUCCESS, getpid, sigfillset, sigprocmask, SIG_SETMASK, sigwaitinfo, SIGINT,
            SIGTERM};

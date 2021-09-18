@@ -15,7 +15,6 @@ enum ChildStatus {
 }
 
 fn classify_status(status: c_int) -> ChildStatus {
-    unsafe {
 	if WIFEXITED(status) {
 	    ChildStatus::Exited(WEXITSTATUS(status))
 	} else if WIFSIGNALED(status) {
@@ -30,7 +29,6 @@ fn classify_status(status: c_int) -> ChildStatus {
 	} else {
 	    ChildStatus::Unknown
 	}
-    }
 }
 
 pub fn print_wait_status(msg: Option<&str>, status: c_int) {

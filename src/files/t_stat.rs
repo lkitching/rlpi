@@ -3,7 +3,7 @@ use std::mem::{MaybeUninit};
 use std::ffi::CString;
 
 use libc::{exit, EXIT_SUCCESS, stat, lstat, S_IFREG, S_IFDIR, S_IFCHR, S_IFBLK, S_IFLNK, S_IFIFO, S_IFSOCK, S_IFMT,
-           major, minor, mode_t, S_ISUID, S_ISGID, S_ISVTX};
+           major, minor, S_ISUID, S_ISGID, S_ISVTX};
 use clap::{Arg, App};
 
 use crate::error_functions::{err_exit};

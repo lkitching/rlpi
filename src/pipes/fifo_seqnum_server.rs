@@ -1,15 +1,12 @@
 //listing 44-7 (page 912)
 use std::ffi::{CString};
 use std::mem::{self, MaybeUninit};
-use std::os::raw::{c_int, c_void};
-use std::ops::{AddAssign};
-use std::fs;
+use std::os::raw::{c_void};
 
 use libc::{umask, mkfifo, S_IRUSR, S_IWUSR, S_IWGRP, open, O_RDONLY, O_WRONLY, signal, SIGPIPE, SIG_IGN, SIG_ERR, read, write,
-	   pid_t, close};
+		   close};
 
 extern crate rlpi;
-use rlpi::libc::{errno};
 use rlpi::error_functions::{err_exit, err_msg};
 use rlpi::pipes::fifo_seqnum::{SERVER_FIFO, Request, Response, get_client_fifo};
 

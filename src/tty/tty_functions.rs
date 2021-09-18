@@ -1,6 +1,5 @@
 use std::os::raw::{c_int};
 use std::mem::{MaybeUninit};
-use std::ops::{BitAndAssign, BitOrAssign};
 
 use libc::{termios, tcgetattr, tcsetattr, ICANON, ECHO, ISIG, ICRNL, TCSAFLUSH, VMIN, VTIME, BRKINT, IGNBRK, IGNCR, INLCR, INPCK, ISTRIP, PARMRK, OPOST,
            IXON, IEXTEN};

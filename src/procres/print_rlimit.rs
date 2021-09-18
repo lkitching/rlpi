@@ -1,7 +1,6 @@
 use std::fmt::{Display, Formatter, Error};
-use std::convert::{From, Into};
+use std::convert::{From};
 use std::mem::{MaybeUninit};
-use std::os::raw::{c_int};
 
 use libc::{rlimit, getrlimit, RLIM_INFINITY, RLIM_SAVED_CUR, rlim_t, __rlimit_resource_t};
 

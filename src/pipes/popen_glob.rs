@@ -1,27 +1,25 @@
 //listing 44-5 (page 904)
-use std::{io, env};
-use std::io::{BufRead, Write};
+use std::{io};
+use std::io::{Write};
 use std::ffi::{CString, CStr};
-use std::ops::{AddAssign};
 use std::os::raw::{c_char};
 
-use libc::{PATH_MAX, popen, pclose, fgets, exit, EXIT_SUCCESS};
+use libc::{PATH_MAX, popen, pclose, fgets};
 use regex::{Regex};
 
 extern crate rlpi;
 use rlpi::procexec::print_wait_status::{print_wait_status};
 
 pub fn main() {
-    let args: Vec<String> = env::args().collect();
     let glob_regex = Regex::new(r"^[A-Za-z0-9_*?\[\]]+$").expect("Failed to create regex");
 
     loop {
-	print!("pattern: ");
-	io::stdout().flush().expect("Failed to flush stdout");
+		print!("pattern: ");
+		io::stdout().flush().expect("Failed to flush stdout");
 
 	let line = {
 	    let mut s = String::new();
-	    io::stdin().lock().read_line(&mut s);
+	    io::stdin().read_line(&mut s).expect("Failed to read stdin");
 	    s
 	};
 
@@ -71,6 +69,4 @@ pub fn main() {
 	    print_wait_status(Some("\t"), status);
 	}
     }
-
-    unsafe { exit(EXIT_SUCCESS); }
 }

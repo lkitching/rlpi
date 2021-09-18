@@ -106,7 +106,7 @@ extern "C" fn tstp_handler(sig: c_int) {
 }
 
 fn set_if_not_ignored(signum: c_int, act: &sigaction) {
-    let mut prev: MaybeUninit<sigaction> = unsafe { MaybeUninit::uninit() };
+    let mut prev: MaybeUninit<sigaction> = MaybeUninit::uninit();
     if unsafe { sigaction(SIGQUIT, ptr::null(), prev.as_mut_ptr()) } == -1 {
 	err_exit("sigaction");
     }

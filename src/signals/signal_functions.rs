@@ -23,20 +23,20 @@ pub fn print_sigset(of: *mut FILE, prefix: &str, sigset: *const sigset_t) {
 	if unsafe { sigismember(sigset, sig) } != 0 {
 	    cnt = cnt + 1;
 	    let msg = format!("{}{} ({})\n", prefix, sig, str_signal(sig));
-	    let msg_s = unsafe { CString::new(msg.as_str()).expect("Failed to create CString") };
+	    let msg_s = CString::new(msg.as_str()).expect("Failed to create CString");
 	    unsafe { fprintf(of, msg_s.as_ptr()); }
 	}
     }
 
     if cnt == 0 {
 	let msg = format!("{}<empty signal set>", prefix);
-	let msg_s = unsafe { CString::new(msg.as_str()).expect("Failed to create CString") };
+	let msg_s = CString::new(msg.as_str()).expect("Failed to create CString");
 	unsafe { fprintf(of, msg_s.as_ptr()); }
     }
 }
 
 pub fn print_sig_mask(of: *mut FILE, msg: &str) -> Result<(), ()> {
-    let mut current_mask = unsafe { MaybeUninit::uninit() };
+    let mut current_mask = MaybeUninit::uninit();
     if unsafe { sigprocmask(SIG_BLOCK, ptr::null(), current_mask.as_mut_ptr()) } == -1 {
 	return Err(())
     }
@@ -47,7 +47,7 @@ pub fn print_sig_mask(of: *mut FILE, msg: &str) -> Result<(), ()> {
 }
 
 pub fn print_pending_sigs(of: *mut FILE, msg: &str) -> Result<(), ()> {
-    let mut pending_sigs = unsafe { MaybeUninit::uninit() };
+    let mut pending_sigs = MaybeUninit::uninit();
     if unsafe { sigpending(pending_sigs.as_mut_ptr()) } == -1 {
 	return Err(())
     }
@@ -59,10 +59,10 @@ pub fn print_pending_sigs(of: *mut FILE, msg: &str) -> Result<(), ()> {
 
 pub fn sig_empty_set() -> sigset_t {
     unsafe {
-	let mut empty_mask = MaybeUninit::uninit();
-	if sigemptyset(empty_mask.as_mut_ptr()) == -1 {
-	    panic!("Failed to initialise empty signal set");	
-	}
-	empty_mask.assume_init()
+        let mut empty_mask = MaybeUninit::uninit();
+        if sigemptyset(empty_mask.as_mut_ptr()) == -1 {
+            panic!("Failed to initialise empty signal set");
+        }
+        empty_mask.assume_init()
     }
 }

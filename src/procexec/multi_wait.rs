@@ -18,46 +18,45 @@ pub fn main(args: &[String]) {
     unsafe { setbuf(stdout, ptr::null_mut()); }
 
     // create child process for each sleep period
-    for j in (1..args.len()) {
-	match unsafe { fork() } {
-	    -1 => {
-		err_exit("fork");
-	    },
-	    0 => {		
-		let period_seconds: u8 = args[j].parse().expect("Invalid sleep period");
-		println!("[{}] child {} started with PID {}, sleeping {} seconds",
-			 curr_time(Some("%T")).expect("Failed to get current time"),
-			 j,
-			 unsafe { getpid() },
-			 period_seconds);
-		thread::sleep(Duration::from_secs(period_seconds as u64));
-		unsafe { _exit(EXIT_SUCCESS); }
-			 
-	    },
-	    _ => {
-		// parent
-		// continue spawning child processes
-	    }
-	}
+    for j in 1..args.len() {
+		match unsafe { fork() } {
+			-1 => {
+				err_exit("fork");
+			},
+			0 => {
+				let period_seconds: u8 = args[j].parse().expect("Invalid sleep period");
+				println!("[{}] child {} started with PID {}, sleeping {} seconds",
+					 curr_time(Some("%T")).expect("Failed to get current time"),
+					 j,
+					 unsafe { getpid() },
+					 period_seconds);
+				thread::sleep(Duration::from_secs(period_seconds as u64));
+				unsafe { _exit(EXIT_SUCCESS); }
+			},
+			_ => {
+			// parent
+			// continue spawning child processes
+			}
+		}
     }
 
     // wait for all child processes to exit
     let mut num_dead = 0;
     loop {
-	let child_pid = unsafe { wait(ptr::null_mut()) };
-	if child_pid == -1 {
-	    if errno() == ECHILD {
-		println!("No more children - bye!");
-		unsafe { exit(EXIT_SUCCESS); }
-	    } else {
-		err_exit("wait");
-	    }
-	} else {
-	    num_dead = num_dead + 1;
-	    println!("[{}] wait() returned child PID {} (num_dead = {})",
-		     curr_time(Some("%T")).expect("Failed to get current time"),
-		     child_pid,
-		     num_dead);
-	}
+		let child_pid = unsafe { wait(ptr::null_mut()) };
+		if child_pid == -1 {
+			if errno() == ECHILD {
+				println!("No more children - bye!");
+				unsafe { exit(EXIT_SUCCESS); }
+			} else {
+				err_exit("wait");
+			}
+		} else {
+			num_dead = num_dead + 1;
+			println!("[{}] wait() returned child PID {} (num_dead = {})",
+				 curr_time(Some("%T")).expect("Failed to get current time"),
+				 child_pid,
+				 num_dead);
+		}
     }
 }
