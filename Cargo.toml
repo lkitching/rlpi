@@ -188,3 +188,7 @@ path="src/fileio/seek_io.rs"
 [[bin]]
 name="mmcat"
 path="src/mmap/mmcat.rs"
+
+[[bin]]
+name="t_mmap"
+path="src/mmap/t_mmap.rs"
