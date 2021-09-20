@@ -1,35 +1,35 @@
 //listing 62-4 (page 1313)
 use std::os::raw::{c_int, c_char, c_void};
 use std::mem::{MaybeUninit};
-use std::ptr;
+use std::{env, ptr};
 
 use libc::{exit, _exit, EXIT_SUCCESS, termios, STDIN_FILENO, TCSAFLUSH, tcgetattr, tcsetattr, SA_RESTART, sigaction, sighandler_t, SIGQUIT, SIG_IGN,
            setbuf, isalpha, putchar, tolower, iscntrl, read, SIGINT, SIGTERM, signal, raise, sigaddset, sigprocmask, SIGTSTP, SIG_DFL, SIG_ERR,
            SIG_UNBLOCK, SIG_SETMASK};
 
-use crate::libc::{errno, set_errno};
-use crate::libc::stdio::{stdout};
-use crate::error_functions::{err_exit, err_msg};
-use crate::signals::signal_functions::{sig_empty_set};
-use super::tty_functions::{tty_set_cbreak, tty_set_raw, get_attrs};
+use rlpi::libc::{errno, set_errno};
+use rlpi::libc::stdio::{stdout};
+use rlpi::error_functions::{err_exit, err_msg};
+use rlpi::signals::signal_functions::{sig_empty_set};
+use rlpi::tty::tty_functions::{tty_set_cbreak, tty_set_raw, get_attrs};
 
 // terminal settings defined by user
 static mut USER_TERMIOS: Option<termios> = None;
 
-extern "C" fn handler(sig: c_int) {
+extern "C" fn handler(_sig: c_int) {
     unsafe {
-	// TODO: lock?
-	if let Some(user_termios) = USER_TERMIOS {
-	    if tcsetattr(STDIN_FILENO, TCSAFLUSH, &user_termios) == -1 {
-		err_exit("tcsetattr");
-	    }
-	}
-	_exit(EXIT_SUCCESS);
+		// TODO: lock?
+		if let Some(user_termios) = USER_TERMIOS {
+			if tcsetattr(STDIN_FILENO, TCSAFLUSH, &user_termios) == -1 {
+				err_exit("tcsetattr");
+			}
+		}
+		_exit(EXIT_SUCCESS);
     }
 }
 
 // handler for SIGTSTP
-extern "C" fn tstp_handler(sig: c_int) {
+extern "C" fn tstp_handler(_sig: c_int) {
     let saved_errno = errno();
 
     // save current terminal settings, restore terminal to state at time of program startup
@@ -119,7 +119,8 @@ fn set_if_not_ignored(signum: c_int, act: &sigaction) {
     }
 }
 
-pub fn main(args: &[String]) -> ! {
+pub fn main() {
+	let args: Vec<String> = env::args().collect();
 
     let sa = sigaction {
 	sa_sigaction: handler as extern "C" fn(c_int) as sighandler_t,

@@ -3,7 +3,6 @@ use std::{mem, ptr};
 
 use libc::{semget, IPC_CREAT, shmget, STDIN_FILENO, read, IPC_RMID, shmat, shmdt, shmctl, semctl};
 
-use rlpi::libc::sys::sem::{semun};
 use rlpi::svsem::binary_sems::{BinarySempahores};
 
 use rlpi::svshm::svshm_xfr::{SEM_KEY, SHM_KEY, OBJ_PERMS, READ_SEM, WRITE_SEM, ShmSeg, BUF_SIZE};

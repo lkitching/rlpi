@@ -4,13 +4,13 @@ use std::mem::{MaybeUninit};
 
 use libc::{exit, EXIT_SUCCESS, tcgetattr, tcsetattr, STDIN_FILENO, TCSANOW, TCSAFLUSH, ECHO, termios};
 
-use crate::error_functions::{err_exit};
+use rlpi::error_functions::{err_exit};
 
-pub fn main(args: &[String]) -> ! {
+pub fn main() {
     // retrieve current terminal settings and turn off echoing
     let mut tp: MaybeUninit<termios> = MaybeUninit::uninit();
     if unsafe { tcgetattr(STDIN_FILENO, tp.as_mut_ptr()) } == -1 {
-	err_exit("tcgetattr");
+        err_exit("tcgetattr");
     }
     let mut tp = unsafe { tp.assume_init() };
 
@@ -21,7 +21,7 @@ pub fn main(args: &[String]) -> ! {
     tp.c_lflag = tp.c_lflag & !ECHO;
 
     if unsafe { tcsetattr(STDIN_FILENO, TCSAFLUSH, &tp) } == -1 {
-	err_exit("tcsetattr");
+        err_exit("tcsetattr");
     }
 
     // read some input and display it back to the user
@@ -35,9 +35,8 @@ pub fn main(args: &[String]) -> ! {
 
     // restore original terminal settings
     if unsafe { tcsetattr(STDIN_FILENO, TCSANOW, &save) } == -1 {
-	err_exit("tcsetattr");
+        err_exit("tcsetattr");
     }
-    
-    
+
     unsafe { exit(EXIT_SUCCESS); }
 }

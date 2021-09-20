@@ -1,9 +1,9 @@
 // listing 48-3 (page 1005)
-use std::{mem, ptr};
+use std::{ptr};
 
-use libc::{semget, IPC_CREAT, shmget, write, STDOUT_FILENO, ssize_t, shmat, shmdt};
+use libc::{semget, shmget, write, STDOUT_FILENO, ssize_t, shmat, shmdt};
 
-use rlpi::svshm::svshm_xfr::{SEM_KEY, OBJ_PERMS, WRITE_SEM, READ_SEM, ShmSeg, SHM_KEY};
+use rlpi::svshm::svshm_xfr::{SEM_KEY, WRITE_SEM, READ_SEM, ShmSeg, SHM_KEY};
 use rlpi::error_functions::{err_exit, fatal};
 use rlpi::svsem::binary_sems::BinarySempahores;
 use std::os::raw::{c_ushort, c_void};

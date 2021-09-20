@@ -6,22 +6,22 @@ use libc::{exit, EXIT_SUCCESS, stat, lstat, S_IFREG, S_IFDIR, S_IFCHR, S_IFBLK, 
            major, minor, S_ISUID, S_ISGID, S_ISVTX};
 use clap::{Arg, App};
 
-use crate::error_functions::{err_exit};
-use crate::util::{read_str};
-use crate::libc::time::{ctime};
-use super::file_perms::{file_perm_str};
+use rlpi::error_functions::{err_exit};
+use rlpi::util::{read_str};
+use rlpi::libc::time::{ctime};
+use rlpi::files::file_perms::{file_perm_str};
 
 fn display_stat_info(sb: &stat) {
     print!("File type:\t\t");
     match sb.st_mode & S_IFMT {
-	S_IFREG => { println!("regular file"); },
-	S_IFDIR => { println!("directory"); },
-	S_IFCHR => { println!("character device"); },
-	S_IFBLK => { println!("block device"); },
-	S_IFLKN => { println!("symbolic (soft) link"); },
-	S_IFIFO => { println!("FIFO or pipe"); },
-	S_IFSOCK => { println!("socket"); }
-	_ => { println!("unknown file type"); }
+        S_IFREG => { println!("regular file"); },
+        S_IFDIR => { println!("directory"); },
+        S_IFCHR => { println!("character device"); },
+        S_IFBLK => { println!("block device"); },
+        S_IFLNK => { println!("symbolic (soft) link"); },
+        S_IFIFO => { println!("FIFO or pipe"); },
+        S_IFSOCK => { println!("socket"); }
+        _ => { println!("unknown file type"); }
     }
 
     println!("Device containing i-node: major={}\tminor={}", unsafe { major(sb.st_dev) }, unsafe { minor(sb.st_dev) });
@@ -52,7 +52,7 @@ fn display_stat_info(sb: &stat) {
     println!("Last status change: {}", unsafe { read_str(ctime(&sb.st_ctime)) });
 }
 
-pub fn main(args: &[String]) -> ! {
+pub fn main() {
     let matches = App::new("t_stat")
 	.about("Displays information about a file or symbolic link")
 	.arg(Arg::with_name("path")
@@ -69,17 +69,16 @@ pub fn main(args: &[String]) -> ! {
     let path_s = CString::new(path).expect("Failed to create CString");
     
     if stat_link {	
-	if unsafe { lstat(path_s.as_ptr(), sb.as_mut_ptr()) } == -1 {
-	    err_exit("lstat");
-	}
+        if unsafe { lstat(path_s.as_ptr(), sb.as_mut_ptr()) } == -1 {
+            err_exit("lstat");
+        }
     } else {
-	if unsafe { stat(path_s.as_ptr(), sb.as_mut_ptr()) } == -1 {
-	    err_exit("stat");
-	}
+        if unsafe { stat(path_s.as_ptr(), sb.as_mut_ptr()) } == -1 {
+            err_exit("stat");
+        }
     }
 
     let sb = unsafe { sb.assume_init() };
-    
     display_stat_info(&sb);
 
     unsafe { exit(EXIT_SUCCESS); }

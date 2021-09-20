@@ -1,23 +1,24 @@
-use std::mem::ManuallyDrop;
-use std::os::raw::{c_int, c_void};
+ use std::os::raw::{c_int, c_void};
 use std::ffi::CString;
+use std::env;
 
-use crate::libc::{exit, ExitStatus};
-use crate::error_functions::{usage_err, err_exit, cmd_line_err};
-use crate::libc::sys::types::{off_t, size_t};
-use crate::libc::ctype::{isprint};
-use crate::libc::fcntl::{open, O_RDWR, O_CREAT};
-use crate::libc::sys::stat::{S_IRUSR, S_IWUSR, S_IRGRP, S_IWGRP, S_IROTH, S_IWOTH};
-use crate::libc::unistd::{read, write, lseek, SEEK_SET};
+use rlpi::libc::{exit, ExitStatus};
+use rlpi::error_functions::{usage_err, err_exit, cmd_line_err};
+use rlpi::libc::sys::types::{off_t, size_t};
+use rlpi::libc::ctype::{isprint};
+use rlpi::libc::fcntl::{open, O_RDWR, O_CREAT};
+use rlpi::libc::sys::stat::{S_IRUSR, S_IWUSR, S_IRGRP, S_IWGRP, S_IROTH, S_IWOTH};
+use rlpi::libc::unistd::{read, write, lseek, SEEK_SET};
 
 fn can_print(b: u8) -> bool {
     let i = unsafe { isprint(b as c_int) };
     i != 0
 }
 
-pub fn main(args: &[String]) -> ! {
+pub fn main() {
+	let args: Vec<String> = env::args().collect();
     if args.len() < 3 {
-	usage_err(&format!("{} file {{r<length>|R<length>|w<string>|s<offset>}}+\n", args[0]));
+		usage_err(&format!("{} file {{r<length>|R<length>|w<string>|s<offset>}}+\n", args[0]));
     }
 
     let src_path = args[1].as_str();
@@ -25,7 +26,7 @@ pub fn main(args: &[String]) -> ! {
 
     let fd = unsafe { open(csrc_path.as_ptr(), O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH) };
     if fd == -1 {
-	err_exit("open");
+		err_exit("open");
     }
 
     for cmd in args.iter().skip(2) {
@@ -42,7 +43,6 @@ pub fn main(args: &[String]) -> ! {
 		    print!("{}: ", cmd);
 		    unsafe {
 			let p = buf.as_mut_ptr();
-			let buf = ManuallyDrop::new(buf);
 			let read_buf = Vec::from_raw_parts(p, num_read as usize, offset as usize);
 
 			//if command begins with 'r' display characters otherwise it starts with

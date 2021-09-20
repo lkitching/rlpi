@@ -1,6 +1,6 @@
 //listing 26-3 (page 548)
 use std::env;
-use libc::{fork, exit, EXIT_SUCCESS, EXIT_FAILURE, waitpid, WUNTRACED, WCONTINUED, WIFSIGNALED, WIFEXITED, pause, getpid};
+use libc::{fork, exit, EXIT_SUCCESS, waitpid, WUNTRACED, WCONTINUED, WIFSIGNALED, WIFEXITED, pause, getpid};
 
 use rlpi::error_functions::{usage_err, err_exit};
 use rlpi::procexec::print_wait_status::{print_wait_status};
