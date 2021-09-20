@@ -21,6 +21,13 @@ fn set_value(sem_id: c_int, sem_num: c_int, value: c_int) -> Result<(), ()> {
 }
 
 impl BinarySempahores {
+    pub fn default() -> Self {
+        BinarySempahores {
+            use_sem_undo: false,
+            retry_on_eintr: true
+        }
+    }
+    
     pub fn init_sem_available(&self, sem_id: c_int, sem_num: c_int) -> Result<(), ()> {
         set_value(sem_id, sem_num, 1)
     }
