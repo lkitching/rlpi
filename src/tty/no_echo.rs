@@ -5,7 +5,6 @@ use std::mem::{MaybeUninit};
 use libc::{exit, EXIT_SUCCESS, tcgetattr, tcsetattr, STDIN_FILENO, TCSANOW, TCSAFLUSH, ECHO, termios};
 
 use crate::error_functions::{err_exit};
-use crate::libc::stdio::{stdout};
 
 pub fn main(args: &[String]) -> ! {
     // retrieve current terminal settings and turn off echoing

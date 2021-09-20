@@ -9,7 +9,7 @@ use crate::error_functions::{err_exit};
 use crate::libc::time::{asctime, ctime};
 
 pub fn main(args: &[String]) -> ! {
-    let mut t = unsafe { time(ptr::null_mut()) };
+    let t = unsafe { time(ptr::null_mut()) };
     println!("Seconds since the Epoch (1 Jan 1970): {}", t);
 
     let mut tv = MaybeUninit::<timeval>::uninit();

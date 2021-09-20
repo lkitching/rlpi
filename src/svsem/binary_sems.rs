@@ -27,7 +27,7 @@ impl BinarySempahores {
             retry_on_eintr: true
         }
     }
-    
+
     pub fn init_sem_available(&self, sem_id: c_int, sem_num: c_int) -> Result<(), ()> {
         set_value(sem_id, sem_num, 1)
     }

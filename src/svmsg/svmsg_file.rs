@@ -1,12 +1,10 @@
 use std::os::raw::{c_long, c_int, c_void};
-use std::path::{PathBuf, Path};
-use std::ffi::{CString, CStr};
+use std::path::{Path};
 use std::mem::MaybeUninit;
 use std::str;
 
 use libc::{PATH_MAX, key_t, size_t, msgrcv, EINTR, msgsnd};
 
-use crate::error_functions::err_exit;
 use crate::libc::{errno};
 
 pub const SERVER_KEY: key_t = 0x1aaaaaa1;

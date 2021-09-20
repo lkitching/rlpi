@@ -1,5 +1,5 @@
 //listing 62-4 (page 1313)
-use std::os::raw::{c_int, c_char, c_uchar, c_void};
+use std::os::raw::{c_int, c_char, c_void};
 use std::mem::{MaybeUninit};
 use std::ptr;
 

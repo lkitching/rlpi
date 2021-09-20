@@ -31,7 +31,7 @@ impl Drop for DirStream {
 }
 
 fn open_dir(path: &str) -> DirStream {
-    let dir_s = unsafe { CString::new(path).expect("Failed to create CString") };
+    let dir_s = CString::new(path).expect("Failed to create CString");
     let dir_p = unsafe { opendir(dir_s.as_ptr()) };
 
     if dir_p.is_null() {

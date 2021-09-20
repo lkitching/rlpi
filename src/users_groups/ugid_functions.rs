@@ -77,13 +77,13 @@ impl Iterator for PWIterator {
     }
 }
 
-pub fn main(args: &[String]) -> ! {
-    let mut i = PWIterator { ended: false };
+pub fn main() {
+    let i = PWIterator { ended: false };
     for p in i {	
-	unsafe {
-	    println!("id: {}", (*p).pw_uid);
-	    println!("name: {}", read_user_name(p));
-	}
+        unsafe {
+            println!("id: {}", (*p).pw_uid);
+            println!("name: {}", read_user_name(p));
+        }
     }
     unsafe { exit(EXIT_SUCCESS) };
 }

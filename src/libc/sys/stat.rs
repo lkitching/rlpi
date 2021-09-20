@@ -1,4 +1,4 @@
-#[warn(non_camel_case_types)]
+#[allow(non_camel_case_types)]
 pub type mode_t = u32; //typesizes.h
 
 //defined in sys/stat.h as aliases for types in bits/stat.h

@@ -6,18 +6,18 @@ use libc::{_exit, EXIT_SUCCESS, umask, setsid, chdir, close, open, O_RDWR, STDIN
 
 use crate::util::{try_fork, ForkResult};
 
-type daemon_flags = u16;
-pub const BD_NO_CHDIR: daemon_flags = 0o1;
-pub const BD_NO_CLOSE_FILES: daemon_flags = 0o2;
-pub const BD_NO_REOPEN_STD_FDS: daemon_flags = 0o4;
-pub const BD_NO_UMASK0: daemon_flags = 0o10;
-pub const BD_MAX_CLOSE: daemon_flags = 8192;
+type DaemonFlags = u16;
+pub const BD_NO_CHDIR: DaemonFlags = 0o1;
+pub const BD_NO_CLOSE_FILES: DaemonFlags = 0o2;
+pub const BD_NO_REOPEN_STD_FDS: DaemonFlags = 0o4;
+pub const BD_NO_UMASK0: DaemonFlags = 0o10;
+pub const BD_MAX_CLOSE: DaemonFlags = 8192;
 
 pub fn is_set<T: Eq + Copy + BitAnd<Output = T>>(value: T, flag: T) -> bool {
     return value & flag == flag
 }
 
-pub fn become_daemon(flags: daemon_flags) -> Result<(), String> {
+pub fn become_daemon(flags: DaemonFlags) -> Result<(), String> {
     // become background process
     if let ForkResult::Parent(_) = try_fork()? {
 	unsafe { _exit(EXIT_SUCCESS); }

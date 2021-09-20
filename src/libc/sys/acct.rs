@@ -2,7 +2,7 @@ use std::os::raw::{c_char};
 
 const ACCT_COMM: usize = 16;
 
-#[warn(non_camel_case_types)]
+#[allow(non_camel_case_types)]
 pub type comp_t = u16;
 
 // enum

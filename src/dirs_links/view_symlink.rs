@@ -14,7 +14,7 @@ pub fn main(args: &[String]) -> ! {
 
     let mut statbuf = MaybeUninit::uninit();
     let path = args[1].as_str();
-    let path_s = unsafe { CString::new(path).expect("Failed to create CString") };
+    let path_s = CString::new(path).expect("Failed to create CString");
 
     if unsafe { lstat(path_s.as_ptr(), statbuf.as_mut_ptr()) } == -1 {
 	err_exit("lstat");

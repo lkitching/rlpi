@@ -24,14 +24,14 @@ pub fn main(args: &[String]) -> ! {
     unsafe { setbuf(stdout, ptr::null_mut()); }
 
     let fd = {
-	let template_s = CString::new("/tmp/testXXXXXX").expect("Invalid CString");
-	let mut p = template_s.into_raw();	
-	let fd = unsafe { mkstemp(p) };
-	let _ = unsafe { CString::from_raw(p) };
-	fd
+		let template_s = CString::new("/tmp/testXXXXXX").expect("Invalid CString");
+		let p = template_s.into_raw();
+		let fd = unsafe { mkstemp(p) };
+		let _ = unsafe { CString::from_raw(p) };
+		fd
     };
     if fd == -1 {
-	err_exit("mkstemp");
+		err_exit("mkstemp");
     }
 
     println!("File offset before fork(): {}", unsafe { lseek(fd, 0, SEEK_CUR) });

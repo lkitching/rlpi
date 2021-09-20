@@ -14,7 +14,7 @@ static SALT_BUF: [c_char; 3] = [120,120,0];
 static STR2_BUF: AtomicUsize = AtomicUsize::new(0);
 static HANDLED: AtomicUsize = AtomicUsize::new(0);
 
-extern "C" fn handler(sig: c_int) {
+extern "C" fn handler(_sig: c_int) {
     let p = STR2_BUF.load(Ordering::SeqCst) as *const c_char;
     unsafe { crypt(p, SALT_BUF.as_ptr()); }
     HANDLED.fetch_add(1, Ordering::SeqCst);
@@ -36,7 +36,7 @@ pub fn main(args: &[String]) {
 	err_exit("strdup");
     }
 
-    let mut sa = sigaction {
+    let sa = sigaction {
 	sa_sigaction: handler as extern fn(c_int) as *const c_void as sighandler_t,
 	sa_mask: sig_empty_set(),
 	sa_flags: 0,
