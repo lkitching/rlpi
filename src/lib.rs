@@ -29,3 +29,4 @@ pub mod daemons;
 pub mod pipes;
 pub mod svmsg;
 pub mod svsem;
+pub mod svshm;

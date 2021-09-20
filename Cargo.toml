@@ -148,3 +148,11 @@ path="src/pgsjc/catch_sighup.rs"
 [[bin]]
 name="child_status"
 path="src/procexec/child_status.rs"
+
+[[bin]]
+name="svshm_xfr_reader"
+path="src/svshm/svshm_xfr_reader.rs"
+
+[[bin]]
+name="svshm_xfr_writer"
+path="src/svshm/svshm_xfr_writer.rs"
