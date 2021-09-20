@@ -184,3 +184,7 @@ path="src/files/t_stat.rs"
 [[bin]]
 name="seek_io"
 path="src/fileio/seek_io.rs"
+
+[[bin]]
+name="mmcat"
+path="src/mmap/mmcat.rs"
