@@ -192,3 +192,7 @@ path="src/mmap/mmcat.rs"
 [[bin]]
 name="t_mmap"
 path="src/mmap/t_mmap.rs"
+
+[[bin]]
+name="anon_mmap"
+path="src/mmap/anon_mmap.rs"
