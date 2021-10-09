@@ -212,3 +212,7 @@ path="src/pmsg/pmsg_unlink.rs"
 [[bin]]
 name="pmsg_create"
 path="src/pmsg/pmsg_create.rs"
+
+[[bin]]
+name="pmsg_getattr"
+path="src/pmsg/pmsg_getattr.rs"
