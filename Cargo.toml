@@ -204,3 +204,7 @@ path="src/vmem/t_mprotect.rs"
 [[bin]]
 name="memlock"
 path="src/vmem/memlock.rs"
+
+[[bin]]
+name="pmsg_unlink"
+path="src/pmsg/pmsg_unlink.rs"
