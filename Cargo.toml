@@ -220,3 +220,7 @@ path="src/pmsg/pmsg_getattr.rs"
 [[bin]]
 name="pmsg_send"
 path="src/pmsg/pmsg_send.rs"
+
+[[bin]]
+name="pmsg_receive"
+path="src/pmsg/pmsg_receive.rs"
