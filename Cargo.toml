@@ -208,3 +208,7 @@ path="src/vmem/memlock.rs"
 [[bin]]
 name="pmsg_unlink"
 path="src/pmsg/pmsg_unlink.rs"
+
+[[bin]]
+name="pmsg_create"
+path="src/pmsg/pmsg_create.rs"
