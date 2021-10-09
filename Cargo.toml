@@ -200,3 +200,7 @@ path="src/mmap/anon_mmap.rs"
 [[bin]]
 name="t_mprotect"
 path="src/vmem/t_mprotect.rs"
+
+[[bin]]
+name="memlock"
+path="src/vmem/memlock.rs"
