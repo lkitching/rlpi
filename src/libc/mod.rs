@@ -10,6 +10,7 @@ pub mod libgen;
 pub mod stdio;
 pub mod signal;
 pub mod stdlib;
+pub mod mqueue;
 
 #[link(name = "c")]
 extern {
