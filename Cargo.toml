@@ -244,3 +244,7 @@ path="src/psem/psem_wait.rs"
 [[bin]]
 name="psem_post"
 path="src/psem/psem_post.rs"
+
+[[bin]]
+name="psem_getvalue"
+path="src/psem/psem_getvalue.rs"
