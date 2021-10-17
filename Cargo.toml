@@ -248,3 +248,7 @@ path="src/psem/psem_post.rs"
 [[bin]]
 name="psem_getvalue"
 path="src/psem/psem_getvalue.rs"
+
+[[bin]]
+name="thread_incr_psem"
+path="src/psem/thread_incr_psem.rs"
