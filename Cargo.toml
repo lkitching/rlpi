@@ -236,3 +236,7 @@ path="src/psem/psem_create.rs"
 [[bin]]
 name="psem_unlink"
 path="src/psem/psem_unlink.rs"
+
+[[bin]]
+name="psem_wait"
+path="src/psem/psem_wait.rs"
