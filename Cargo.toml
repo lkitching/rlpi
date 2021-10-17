@@ -232,3 +232,7 @@ path="src/pmsg/mq_notify_sig.rs"
 [[bin]]
 name="psem_create"
 path="src/psem/psem_create.rs"
+
+[[bin]]
+name="psem_unlink"
+path="src/psem/psem_unlink.rs"
