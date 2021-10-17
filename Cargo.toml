@@ -240,3 +240,7 @@ path="src/psem/psem_unlink.rs"
 [[bin]]
 name="psem_wait"
 path="src/psem/psem_wait.rs"
+
+[[bin]]
+name="psem_post"
+path="src/psem/psem_post.rs"
