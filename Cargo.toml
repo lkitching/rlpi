@@ -256,3 +256,7 @@ path="src/psem/thread_incr_psem.rs"
 [[bin]]
 name="pshm_create"
 path="src/pshm/pshm_create.rs"
+
+[[bin]]
+name="pshm_write"
+path="src/pshm/pshm_write.rs"
