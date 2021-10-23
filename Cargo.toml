@@ -260,3 +260,7 @@ path="src/pshm/pshm_create.rs"
 [[bin]]
 name="pshm_write"
 path="src/pshm/pshm_write.rs"
+
+[[bin]]
+name="pshm_read"
+path="src/pshm/pshm_read.rs"
