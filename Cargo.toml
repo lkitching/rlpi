@@ -264,3 +264,7 @@ path="src/pshm/pshm_write.rs"
 [[bin]]
 name="pshm_read"
 path="src/pshm/pshm_read.rs"
+
+[[bin]]
+name="pshm_unlink"
+path="src/pshm/pshm_unlink.rs"
