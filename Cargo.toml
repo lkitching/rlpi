@@ -268,3 +268,7 @@ path="src/pshm/pshm_read.rs"
 [[bin]]
 name="pshm_unlink"
 path="src/pshm/pshm_unlink.rs"
+
+[[bin]]
+name="t_flock"
+path="src/filelock/t_flock.rs"
