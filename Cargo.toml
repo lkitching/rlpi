@@ -272,3 +272,7 @@ path="src/pshm/pshm_unlink.rs"
 [[bin]]
 name="t_flock"
 path="src/filelock/t_flock.rs"
+
+[[bin]]
+name="i_fcntl_locking"
+path="src/filelock/i_fcntl_locking.rs"
