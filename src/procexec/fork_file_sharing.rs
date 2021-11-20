@@ -6,20 +6,20 @@ use std::os::raw::{c_int};
 use libc::{exit, EXIT_SUCCESS, setbuf, lseek, SEEK_CUR, mkstemp, fcntl, F_GETFL, O_APPEND, fork,
            SEEK_SET, _exit, F_SETFL, wait};
 
-use crate::libc::stdio::{stdout};
-use crate::error_functions::{err_exit};
+use rlpi::libc::stdio::{stdout};
+use rlpi::error_functions::{err_exit};
 
 fn print_append_flag(fd: c_int, msg: &str) {
     let flags = unsafe { fcntl(fd, F_GETFL) };
     if flags == -1 {
-	err_exit("fcntl - F_GETFL");
+		err_exit("fcntl - F_GETFL");
     }
 
     let has_append = O_APPEND & flags == O_APPEND;
     println!("O_APPEND flag {} is: {}", msg, if has_append { "on" } else { "off" });
 }
 
-pub fn main(args: &[String]) -> ! {
+pub fn main() {
     //turn off buffering of stdout
     unsafe { setbuf(stdout, ptr::null_mut()); }
 
@@ -46,7 +46,7 @@ pub fn main(args: &[String]) -> ! {
 	0 => {
 	    // child
 	    if unsafe { lseek(fd, 1000, SEEK_SET) } == -1 {
-		err_exit("lseek");
+			err_exit("lseek");
 	    }
 
 	    //fetch current flags and set O_APPEND
@@ -54,7 +54,7 @@ pub fn main(args: &[String]) -> ! {
 	    flags = flags | O_APPEND;
 
 	    if unsafe { fcntl(fd, F_SETFL, flags) } == -1 {
-		err_exit("fcntl - F_SETL");
+			err_exit("fcntl - F_SETL");
 	    }
 	    unsafe { _exit(EXIT_SUCCESS); }
 	},
@@ -63,7 +63,7 @@ pub fn main(args: &[String]) -> ! {
 	    // wait for child to exit
 	    let mut child_status = 0;
 	    if unsafe { wait(&mut child_status) } == -1 {
-		err_exit("wait");
+			err_exit("wait");
 	    }
 	    println!("Child exited with status {}", child_status);
 

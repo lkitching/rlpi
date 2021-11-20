@@ -25,7 +25,7 @@ fn display_cmd_fmt() {
 fn write_prompt(pid: pid_t) {
     //prompt for locking command
     print!("PID={}> ", pid);
-    io::stdout().flush();
+    io::stdout().flush().expect("Failed to flush stdout");
 }
 
 struct LockInfo {

@@ -8,18 +8,18 @@ use std::mem::{MaybeUninit};
 use libc::{exit, _exit, EXIT_SUCCESS, setbuf, sigaddset, SIGUSR1, sigaction, sighandler_t, SA_RESTART,
            fork, getpid, getppid, kill, EINTR, SIG_BLOCK, sigset_t, sigprocmask, sigsuspend, SIG_SETMASK};
 
-use crate::libc::{errno};
-use crate::libc::stdio::{stdout};
-use crate::curr_time::{curr_time};
-use crate::error_functions::{err_exit};
-use crate::signals::signal_functions::{sig_empty_set};
+use rlpi::libc::{errno};
+use rlpi::libc::stdio::{stdout};
+use rlpi::curr_time::{curr_time};
+use rlpi::error_functions::{err_exit};
+use rlpi::signals::signal_functions::{sig_empty_set};
 
 const SYNC_SIG: c_int = SIGUSR1;
 
-extern "C" fn handler(sig: c_int) {
+extern "C" fn handler(_sig: c_int) {
 }
 
-pub fn main(args: &[String]) -> ! {
+pub fn main() {
     //disable buffering of stdout
     unsafe { setbuf(stdout, ptr::null_mut()) };
 

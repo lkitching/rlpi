@@ -5,9 +5,9 @@ use std::ffi::{CString, CStr};
 use libc::{exit, EXIT_SUCCESS, listxattr, getxattr, strlen};
 use clap::{Arg, App};
 
-use crate::error_functions::{err_exit};
+use rlpi::error_functions::{err_exit};
 
-pub fn main(args: &[String]) -> ! {
+pub fn main() {
     let matches = App::new("View file extended attributes")
 	.version("1.0")
 	.about("Displays extended attribute data for files")
@@ -38,7 +38,7 @@ pub fn main(args: &[String]) -> ! {
 
 	//loop through all EA names and display name + value
 	let mut name_p = names_buf.as_mut_ptr();
-	for i in 0..list_len {
+	for _i in 0..list_len {
 	    let name_s = unsafe { CStr::from_ptr(name_p).to_str().expect("Failed to read CStr") };
 	    print!("name = {}; ", name_s);
 

@@ -13,14 +13,14 @@ extern "C" fn thread_func(arg: *mut c_void) -> *mut c_void {
     unsafe {
         let mut td = &mut(*tdp);
 
-        for j in 0 .. unsafe { &*tdp }.num_loops {
-            if unsafe { sem_wait(&mut td.sem) } == -1 {
+        for _j in 0 .. (&*tdp).num_loops {
+            if sem_wait(&mut td.sem) == -1 {
                 err_exit("sem_wait")
             }
 
             td.counter += 1;
 
-            if unsafe { sem_post(&mut td.sem) } == -1 {
+            if sem_post(&mut td.sem) == -1 {
                 err_exit("sem_post");
             }
         }

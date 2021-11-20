@@ -3,12 +3,12 @@ use std::sync::atomic::{AtomicU8, Ordering};
 
 use libc::{exit, EXIT_SUCCESS, fork, sleep, getpid};
 
-use crate::error_functions::{err_exit};
+use rlpi::error_functions::{err_exit};
 
 //TODO: find out where this is allocated
 const IDATA: AtomicU8 = AtomicU8::new(111);
 
-pub fn main(args: &[String]) -> ! {
+pub fn main() {
     // stack allocated
     let mut istack = 222;
     

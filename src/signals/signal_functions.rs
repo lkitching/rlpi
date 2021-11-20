@@ -20,25 +20,25 @@ pub fn str_signal(sig: c_int) -> String {
 pub fn print_sigset(of: *mut FILE, prefix: &str, sigset: *const sigset_t) {
     let mut cnt = 0;
     for sig in 1..NSIG {
-	if unsafe { sigismember(sigset, sig) } != 0 {
-	    cnt = cnt + 1;
-	    let msg = format!("{}{} ({})\n", prefix, sig, str_signal(sig));
-	    let msg_s = CString::new(msg.as_str()).expect("Failed to create CString");
-	    unsafe { fprintf(of, msg_s.as_ptr()); }
-	}
+        if unsafe { sigismember(sigset, sig) } != 0 {
+            cnt = cnt + 1;
+            let msg = format!("{}{} ({})\n", prefix, sig, str_signal(sig));
+            let msg_s = CString::new(msg.as_str()).expect("Failed to create CString");
+            unsafe { fprintf(of, msg_s.as_ptr()); }
+        }
     }
 
     if cnt == 0 {
-	let msg = format!("{}<empty signal set>", prefix);
-	let msg_s = CString::new(msg.as_str()).expect("Failed to create CString");
-	unsafe { fprintf(of, msg_s.as_ptr()); }
+        let msg = format!("{}<empty signal set>", prefix);
+        let msg_s = CString::new(msg.as_str()).expect("Failed to create CString");
+        unsafe { fprintf(of, msg_s.as_ptr()); }
     }
 }
 
-pub fn print_sig_mask(of: *mut FILE, msg: &str) -> Result<(), ()> {
+pub fn print_sig_mask(of: *mut FILE, _msg: &str) -> Result<(), ()> {
     let mut current_mask = MaybeUninit::uninit();
     if unsafe { sigprocmask(SIG_BLOCK, ptr::null(), current_mask.as_mut_ptr()) } == -1 {
-	return Err(())
+        return Err(());
     }
 
     let current_mask = unsafe { current_mask.assume_init() };
@@ -46,10 +46,10 @@ pub fn print_sig_mask(of: *mut FILE, msg: &str) -> Result<(), ()> {
     Ok(())
 }
 
-pub fn print_pending_sigs(of: *mut FILE, msg: &str) -> Result<(), ()> {
+pub fn print_pending_sigs(of: *mut FILE, _msg: &str) -> Result<(), ()> {
     let mut pending_sigs = MaybeUninit::uninit();
     if unsafe { sigpending(pending_sigs.as_mut_ptr()) } == -1 {
-	return Err(())
+        return Err(());
     }
 
     let pending_sigs = unsafe { pending_sigs.assume_init() };

@@ -1,8 +1,6 @@
 // listing 50-1 (page 1046)
 use std::ptr;
 use std::ffi::{CString};
-use std::os::raw::{c_char, c_void};
-use std::mem::{MaybeUninit};
 
 use libc::{mmap, PROT_NONE, MAP_SHARED, MAP_ANONYMOUS, MAP_FAILED, getpid, system, PROT_READ, PROT_WRITE, mprotect};
 use rlpi::error_functions::err_exit;

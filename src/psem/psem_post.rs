@@ -1,7 +1,7 @@
 // listing 53-4 (page 1097)
 use std::env;
 
-use libc::{sem_open, sem_post};
+use libc::{sem_post};
 use rlpi::error_functions::{usage_err, err_exit};
 use rlpi::psem::sem_utils::open_existing;
 

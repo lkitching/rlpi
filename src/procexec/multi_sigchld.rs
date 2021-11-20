@@ -15,7 +15,7 @@ use super::print_wait_status::{print_wait_status};
 
 static NUM_LIVE_CHILDREN: AtomicUsize = AtomicUsize::new(0);
 
-extern "C" fn handler(sig: c_int) {
+extern "C" fn handler(_sig: c_int) {
     // WARNING: This handler uses non-async-safe functions
     let saved_errno = errno();
 

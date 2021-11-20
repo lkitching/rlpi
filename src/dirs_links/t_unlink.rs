@@ -1,13 +1,14 @@
 //listing 18-1 (page 347)
 use std::ffi::{CString};
-use std::mem;
+use std::{env, mem};
 use std::os::raw::{c_char};
 
 use libc::{exit, EXIT_SUCCESS, open, O_WRONLY, O_CREAT, O_EXCL, S_IRUSR, S_IWUSR, unlink, system, close, malloc, size_t, write, ssize_t};
 
-use crate::error_functions::{usage_err, err_exit};
+use rlpi::error_functions::{usage_err, err_exit};
 
-pub fn main(args: &[String]) -> ! {
+pub fn main() {
+    let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
         usage_err(&format!("{} temp-file [num-1kB-blocks]\n", args[0]));
     }
@@ -40,14 +41,14 @@ pub fn main(args: &[String]) -> ! {
             err_exit("malloc");
         }
 
-        for j in 0..num_blocks {
+        for _j in 0..num_blocks {
             let bytes_written = unsafe { write(fd, buf, num_bytes) };
             if bytes_written != (num_bytes as ssize_t) {
-            err_exit("write");
+                err_exit("write");
             }
         }
     }
-    
+
 
     let cmd_str = format!("df -k `dirname {}`", args[1]);
     let cmd_s = CString::new(cmd_str.as_str()).expect("Failed to create CString");
@@ -63,6 +64,6 @@ pub fn main(args: &[String]) -> ! {
     unsafe {
         system(cmd_s.as_ptr());
     }
-		      
+
     unsafe { exit(EXIT_SUCCESS); }
 }

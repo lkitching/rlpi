@@ -14,12 +14,12 @@ use rlpi::files::file_perms::{file_perm_str};
 fn display_stat_info(sb: &stat) {
     print!("File type:\t\t");
     match sb.st_mode & S_IFMT {
-        S_IFREG => { println!("regular file"); },
-        S_IFDIR => { println!("directory"); },
-        S_IFCHR => { println!("character device"); },
-        S_IFBLK => { println!("block device"); },
-        S_IFLNK => { println!("symbolic (soft) link"); },
-        S_IFIFO => { println!("FIFO or pipe"); },
+        S_IFREG => { println!("regular file"); }
+        S_IFDIR => { println!("directory"); }
+        S_IFCHR => { println!("character device"); }
+        S_IFBLK => { println!("block device"); }
+        S_IFLNK => { println!("symbolic (soft) link"); }
+        S_IFIFO => { println!("FIFO or pipe"); }
         S_IFSOCK => { println!("socket"); }
         _ => { println!("unknown file type"); }
     }
@@ -29,10 +29,10 @@ fn display_stat_info(sb: &stat) {
     println!("Mode:\t\t{} ({})", sb.st_mode, file_perm_str(sb.st_mode, true));
 
     if sb.st_mode & (S_ISUID | S_ISGID | S_ISVTX) > 0 {
-	println!("special bits set:\t\t {}{}{}",
-		 if sb.st_mode & S_ISUID > 0 { "set-UID " } else { "" },
-		 if sb.st_mode & S_ISGID > 0 { "set-GID " } else { "" },
-		 if sb.st_mode & S_ISVTX > 0 { "sticky" } else { "" });
+        println!("special bits set:\t\t {}{}{}",
+                 if sb.st_mode & S_ISUID > 0 { "set-UID " } else { "" },
+                 if sb.st_mode & S_ISGID > 0 { "set-GID " } else { "" },
+                 if sb.st_mode & S_ISVTX > 0 { "sticky" } else { "" });
     }
 
     println!("Number of (hard) links:\t{}", sb.st_nlink);
@@ -41,7 +41,7 @@ fn display_stat_info(sb: &stat) {
     let is_chr_dev = sb.st_mode & S_IFMT == S_IFCHR;
     let is_blk_dev = sb.st_mode & S_IFMT == S_IFBLK;
     if is_chr_dev || is_blk_dev {
-	println!("Device number (st_rdev):\tmajor={}; minor={}", unsafe { major(sb.st_rdev) }, unsafe { minor(sb.st_rdev) });
+        println!("Device number (st_rdev):\tmajor={}; minor={}", unsafe { major(sb.st_rdev) }, unsafe { minor(sb.st_rdev) });
     }
 
     println!("File size:\t\t{} bytes", sb.st_size);
@@ -54,21 +54,21 @@ fn display_stat_info(sb: &stat) {
 
 pub fn main() {
     let matches = App::new("t_stat")
-	.about("Displays information about a file or symbolic link")
-	.arg(Arg::with_name("path")
-	     .help("The path to display")
-	     .index(1))
-	.arg(Arg::with_name("link")
-	     .help("Path is a symbolic link"))
-	.get_matches();
+        .about("Displays information about a file or symbolic link")
+        .arg(Arg::with_name("path")
+            .help("The path to display")
+            .index(1))
+        .arg(Arg::with_name("link")
+            .help("Path is a symbolic link"))
+        .get_matches();
 
     let stat_link = matches.is_present("link");
     let path = matches.value_of("path").unwrap();
 
     let mut sb = MaybeUninit::<stat>::uninit();
     let path_s = CString::new(path).expect("Failed to create CString");
-    
-    if stat_link {	
+
+    if stat_link {
         if unsafe { lstat(path_s.as_ptr(), sb.as_mut_ptr()) } == -1 {
             err_exit("lstat");
         }

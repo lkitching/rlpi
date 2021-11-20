@@ -7,10 +7,10 @@ pub fn curr_time(format: Option<&str>) -> Result<String, ()> {
     let tm = unsafe { localtime(&t) };
 
     if tm.is_null() {
-	//TODO: describe error?
-	Err(())
+        //TODO: describe error?
+        Err(())
     } else {
-	let fs = format.unwrap_or("%c");
-	fmt_strftime(fs, &unsafe { *tm })	
+        let fs = format.unwrap_or("%c");
+        fmt_strftime(fs, &unsafe { *tm })
     }
 }

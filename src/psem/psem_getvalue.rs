@@ -1,6 +1,5 @@
 // listing 53-5 (page 1098)
 use std::env;
-use std::os::raw::{c_int};
 
 use libc::{sem_getvalue};
 

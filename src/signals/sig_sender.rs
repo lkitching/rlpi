@@ -1,11 +1,14 @@
 //listing 20-6 (page 412)
+use std::env;
 use libc::{exit, EXIT_SUCCESS, kill};
 
-use crate::error_functions::{usage_err, err_exit};
+use rlpi::error_functions::{usage_err, err_exit};
 
-pub fn main(args: &[String]) -> ! {
+pub fn main() {
+    let args: Vec<String> = env::args().collect();
+
     if args.len() < 4 {
-	usage_err(&format!("{} pid num-sigs sig-num [sig-num-2]\n", args[0]));
+        usage_err(&format!("{} pid num-sigs sig-num [sig-num-2]\n", args[0]));
     }
 
     let pid = args[1].parse().expect("Invalid PID");
@@ -16,19 +19,19 @@ pub fn main(args: &[String]) -> ! {
     //send signals to receiver
     println!("{}: sending signal {} to process {} {} times", args[0], sig, pid, num_sigs);
 
-    for j in 0..num_sigs {
-	if unsafe { kill(pid, sig) } == -1 {
-	    err_exit("kill");
-	}
+    for _j in 0..num_sigs {
+        if unsafe { kill(pid, sig) } == -1 {
+            err_exit("kill");
+        }
     }
 
     //send second signal if specified
     if let Some(sig) = sig2 {
-	if unsafe { kill(pid, sig) } == -1 {
-	    err_exit("kill");
-	}
+        if unsafe { kill(pid, sig) } == -1 {
+            err_exit("kill");
+        }
     }
 
     println!("{}: exiting", args[0]);
-    unsafe { exit(EXIT_SUCCESS); }	
+    unsafe { exit(EXIT_SUCCESS); }
 }

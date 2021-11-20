@@ -5,17 +5,17 @@ use std::os::raw::{c_void};
 
 use libc::{write, STDOUT_FILENO, exit, EXIT_SUCCESS, fork};
 
-use crate::error_functions::{err_exit};
+use rlpi::error_functions::{err_exit};
 
-pub fn main(args: &[String]) -> ! {
+pub fn main() {
     println!("Hello world");
     {
-	let cs = CString::new("Ciao").expect("Failed to create CString");
-	unsafe { write(STDOUT_FILENO, cs.as_ptr() as *const c_void, 5); }
+        let cs = CString::new("Ciao").expect("Failed to create CString");
+        unsafe { write(STDOUT_FILENO, cs.as_ptr() as *const c_void, 5); }
     }
 
     if unsafe { fork() } == -1 {
-	err_exit("fork");
+        err_exit("fork");
     }
 
     // both parent and child continue execution here

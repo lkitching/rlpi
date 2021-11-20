@@ -8,7 +8,6 @@ use libc::{mq_open, mq_attr, O_RDWR, O_CREAT, O_EXCL, S_IRUSR, S_IWUSR, mode_t};
 use rlpi::error_functions::err_exit;
 use std::num::ParseIntError;
 use std::mem::MaybeUninit;
-use std::borrow::BorrowMut;
 
 fn get_flags(matches: &ArgMatches) -> c_int {
     let mut flags = O_RDWR;
