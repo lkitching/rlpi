@@ -9,6 +9,7 @@ pub mod util;
 pub mod memalloc;
 pub mod users_groups;
 pub mod time;
+pub mod threads;
 pub mod filebuff;
 pub mod filesys;
 pub mod files;

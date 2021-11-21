@@ -388,3 +388,7 @@ path="src/threads/simple_thread.rs"
 [[bin]]
 name="thread_incr"
 path="src/threads/thread_incr.rs"
+
+[[bin]]
+name="thread_incr_mutex"
+path="src/threads/thread_incr_mutex.rs"

@@ -1,21 +1,22 @@
-// listing 30-1 (page 632)
+// listing 30-2 (page 636)
+use std::os::raw::{c_void};
 use std::{env, ptr};
-use std::os::raw::{c_int, c_void};
-use std::mem::MaybeUninit;
 
-use libc::{pthread_t, pthread_create, pthread_join};
-use rlpi::error_functions::{err_exit_en};
-use rlpi::threads::thread_util::{create, join, or_die};
+use libc::{PTHREAD_MUTEX_INITIALIZER, pthread_mutex_t};
+use rlpi::threads::thread_util::{create, join, or_die, mutex_lock, mutex_unlock};
 
 static mut GLOB: usize = 0;
+static mut MUTEX: pthread_mutex_t = PTHREAD_MUTEX_INITIALIZER;
 
 extern "C" fn thread_func(arg: *mut c_void) -> *mut c_void {
     let loops = unsafe { *(arg as *mut usize) };
-
     for _ in 0 .. loops {
+        or_die(mutex_lock(unsafe { &mut MUTEX }));
         let mut loc = unsafe { GLOB };
         loc += 1;
-        unsafe { GLOB = loc }
+        unsafe { GLOB = loc; }
+
+        or_die(mutex_unlock(unsafe { &mut MUTEX }))
     }
     ptr::null_mut()
 }
