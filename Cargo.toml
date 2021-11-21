@@ -380,3 +380,7 @@ path="src/proccred/idshow.rs"
 [[bin]]
 name="t_uname"
 path="src/sysinfo/t_uname.rs"
+
+[[bin]]
+name="simple_thread"
+path="src/threads/simple_thread.rs"
