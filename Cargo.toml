@@ -384,3 +384,7 @@ path="src/sysinfo/t_uname.rs"
 [[bin]]
 name="simple_thread"
 path="src/threads/simple_thread.rs"
+
+[[bin]]
+name="thread_incr"
+path="src/threads/thread_incr.rs"
