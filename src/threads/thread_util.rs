@@ -2,7 +2,8 @@ use std::os::raw::{c_int, c_void};
 use std::ptr;
 use std::mem::{MaybeUninit};
 
-use libc::{pthread_t, pthread_create, pthread_join, pthread_mutex_lock, pthread_mutex_unlock, pthread_mutex_t};
+use libc::{pthread_t, pthread_create, pthread_join, pthread_mutex_lock, pthread_mutex_unlock, pthread_mutex_t,
+           pthread_cond_signal, pthread_cond_t, pthread_cond_wait};
 
 use crate::error_functions::err_exit_en;
 
@@ -58,4 +59,22 @@ pub fn mutex_unlock(mutex: &mut pthread_mutex_t) -> Result<(), PThreadErr> {
     } else {
         Ok(())
     }
+}
+
+fn to_result<T, F: FnOnce() -> T>(result: c_int, on_success: F, source_name: &str) -> Result<T, PThreadErr> {
+    if result != 0 {
+        Err(PThreadErr { err_no: result, source: source_name.to_string() })
+    } else {
+        Ok(on_success())
+    }
+}
+
+pub fn cond_signal(signal: &mut pthread_cond_t) -> Result<(), PThreadErr> {
+    let s = unsafe { pthread_cond_signal(signal) };
+    to_result(s, || (), "pthread_cond_signal")
+}
+
+pub fn cond_wait(cond: &mut pthread_cond_t, lock: &mut pthread_mutex_t) -> Result<(), PThreadErr> {
+    let s = unsafe { pthread_cond_wait(cond, lock) };
+    to_result(s, || (), "pthread_cond_wait")
 }

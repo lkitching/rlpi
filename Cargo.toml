@@ -392,3 +392,7 @@ path="src/threads/thread_incr.rs"
 [[bin]]
 name="thread_incr_mutex"
 path="src/threads/thread_incr_mutex.rs"
+
+[[bin]]
+name="thread_multijoin"
+path="src/threads/thread_multijoin.rs"
