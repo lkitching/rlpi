@@ -3,7 +3,7 @@ use std::ptr;
 use std::mem::{MaybeUninit};
 
 use libc::{pthread_t, pthread_create, pthread_join, pthread_mutex_lock, pthread_mutex_unlock, pthread_mutex_t,
-           pthread_cond_signal, pthread_cond_t, pthread_cond_wait};
+           pthread_cond_signal, pthread_cond_t, pthread_cond_wait, pthread_cancel};
 
 use crate::error_functions::err_exit_en;
 
@@ -33,13 +33,11 @@ pub fn create(thread_func: extern "C" fn(*mut c_void) -> *mut c_void, data: *mut
     }
 }
 
-pub fn join(t: pthread_t) -> Result<(), PThreadErr> {
-    // TODO: get return value
-    let s = unsafe { pthread_join(t, ptr::null_mut()) };
-    if s != 0 {
-        Err(PThreadErr { err_no: s, source: "pthread_join".to_string() })
-    } else {
-        Ok(())
+pub fn join(t: pthread_t) -> Result<*mut c_void, PThreadErr> {
+    unsafe {
+        let mut result: MaybeUninit<*mut c_void> = MaybeUninit::uninit();
+        let s = pthread_join(t, result.as_mut_ptr());
+        to_result(s, || unsafe { result.assume_init() }, "pthread_join")
     }
 }
 
@@ -77,4 +75,9 @@ pub fn cond_signal(signal: &mut pthread_cond_t) -> Result<(), PThreadErr> {
 pub fn cond_wait(cond: &mut pthread_cond_t, lock: &mut pthread_mutex_t) -> Result<(), PThreadErr> {
     let s = unsafe { pthread_cond_wait(cond, lock) };
     to_result(s, || (), "pthread_cond_wait")
+}
+
+pub fn cancel(t: pthread_t) -> Result<(), PThreadErr> {
+    let s = unsafe { pthread_cancel(t) };
+    to_result(s, || (), "pthread_cancel")
 }

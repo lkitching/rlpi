@@ -2,6 +2,7 @@
 extern crate memoffset;
 
 pub mod libc;
+pub mod pthread;
 pub mod error_functions;
 pub mod ename;
 pub mod fileio;
