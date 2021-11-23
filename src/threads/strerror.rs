@@ -1,16 +1,14 @@
 // listing 31-1 (page 664)
-use std::os::raw::{c_int, c_char};
+use std::os::raw::{c_int};
 
-use libc::{strncpy};
 use crate::libc::stdio::{_sys_nerr, _sys_errlist};
 use std::ffi::CStr;
 
-const MAX_ERROR_LEN: usize = 256;
 static mut MSG_BUF: String = String::new();
 
 pub fn strerror(err: c_int) -> &'static str {
     let p = unsafe { _sys_errlist[err as usize] };
-    if err < 0 || err >= unsafe { _sys_nerr } || unsafe { p }.is_null() {
+    if err < 0 || err >= unsafe { _sys_nerr } || p.is_null() {
         unsafe { MSG_BUF = format!("Unknown error {}", err) }
     } else {
         let err_s = unsafe { CStr::from_ptr(p) };

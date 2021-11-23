@@ -1,10 +1,7 @@
 // listing 30-1 (page 632)
 use std::{env, ptr};
-use std::os::raw::{c_int, c_void};
-use std::mem::MaybeUninit;
+use std::os::raw::{c_void};
 
-use libc::{pthread_t, pthread_create, pthread_join};
-use rlpi::error_functions::{err_exit_en};
 use rlpi::threads::thread_util::{create, join, or_die};
 
 static mut GLOB: usize = 0;
