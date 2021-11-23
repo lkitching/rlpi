@@ -396,3 +396,7 @@ path="src/threads/thread_incr_mutex.rs"
 [[bin]]
 name="thread_multijoin"
 path="src/threads/thread_multijoin.rs"
+
+[[bin]]
+name="strerror_test"
+path="src/threads/strerror_test.rs"
