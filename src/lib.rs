@@ -27,3 +27,4 @@ pub mod svmsg;
 pub mod svsem;
 pub mod svshm;
 pub mod psem;
+pub mod sockets;

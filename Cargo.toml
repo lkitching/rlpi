@@ -404,3 +404,11 @@ path="src/threads/strerror_test.rs"
 [[bin]]
 name="thread_cancel"
 path="src/threads/thread_cancel.rs"
+
+[[bin]]
+name="us_xfr_sv"
+path="src/sockets/us_xfr_sv.rs"
+
+[[bin]]
+name="us_xfr_cl"
+path="src/sockets/us_xfr_cl.rs"
