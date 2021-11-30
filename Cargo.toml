@@ -412,3 +412,11 @@ path="src/sockets/us_xfr_sv.rs"
 [[bin]]
 name="us_xfr_cl"
 path="src/sockets/us_xfr_cl.rs"
+
+[[bin]]
+name="ud_ucase_sv"
+path="src/sockets/ud_ucase_sv.rs"
+
+[[bin]]
+name="ud_ucase_cl"
+path="src/sockets/ud_ucase_cl.rs"
