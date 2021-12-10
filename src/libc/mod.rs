@@ -11,6 +11,7 @@ pub mod stdio;
 pub mod signal;
 pub mod stdlib;
 pub mod mqueue;
+pub mod inet;
 
 #[link(name = "c")]
 extern {
