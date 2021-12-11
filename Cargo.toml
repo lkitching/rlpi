@@ -428,3 +428,11 @@ path="src/sockets/i6d_ucase_sv.rs"
 [[bin]]
 name="i6d_ucase_cl"
 path="src/sockets/i6d_ucase_cl.rs"
+
+[[bin]]
+name="is_seqnum_sv"
+path="src/sockets/is_seqnum_sv.rs"
+
+[[bin]]
+name="is_seqnum_cl"
+path="src/sockets/is_seqnum_cl.rs"
